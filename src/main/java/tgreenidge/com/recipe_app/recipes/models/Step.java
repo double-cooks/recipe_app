@@ -15,6 +15,14 @@ public class Step {
     int stepNumber;
     String description;
 
+    public Step(){}
+
+    public Step(int stepNumber, String description, Recipe recipe) {
+        this.stepNumber = stepNumber;
+        this.description = description;
+        this.recipe = recipe;
+    }
+
     public long getId() { return this.id; }
 
     public int getStepNumber() {

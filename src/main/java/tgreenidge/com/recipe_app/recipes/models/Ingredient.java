@@ -14,6 +14,13 @@ public class Ingredient {
     @ManyToOne
     Recipe recipe;
 
+    public Ingredient(){}
+
+    public Ingredient(String name, String quantity, Recipe recipe){
+        this.name = name;
+        this.quantity = quantity;
+        this.recipe = recipe;
+    }
     public long getId() {
         return this.id;
     }

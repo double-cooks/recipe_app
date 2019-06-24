@@ -16,14 +16,18 @@ public class Recipe {
     @OneToMany(mappedBy = "recipe")
     List<Ingredient> ingredients;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe")
     List<Step> steps;
 
     @ManyToOne
     User user;
 
-    @ManyToOne
-    Recipe recipe;
+    public Recipe(){}
+
+    public Recipe(String title, User user){
+        this.title = title;
+        this.user = user;
+    }
 
     public long getId() {
         return this.id;

@@ -1,5 +1,6 @@
 package tgreenidge.com.recipe_app.recipes.models;
 
+import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,12 +14,19 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
 
+    @Column(unique = true)
     String username;
     String password;
 
     @OneToMany(mappedBy = "user")
     List<Recipe> recipes;
 
+    public User(){}
+
+    public User(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
 
     public long getId() {
         return this.id;
