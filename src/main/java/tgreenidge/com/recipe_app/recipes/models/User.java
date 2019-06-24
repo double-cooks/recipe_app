@@ -1,6 +1,6 @@
 package tgreenidge.com.recipe_app.recipes.models;
 
-import net.bytebuddy.implementation.bind.MethodDelegationBinder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -28,14 +28,6 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public long getId() {
-        return this.id;
-    }
-
-    public String getUsername() {
-        return this.username;
-    }
-
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -60,7 +52,14 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }
+    
+    public String getUsername() {
+        return this.username;
+    }
 
+    public long getId() {
+        return this.id;
+    }
     public String getPassword() {
         return this.password;
     }
