@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class User implements UserDetails {
+public class AppUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
@@ -18,12 +18,12 @@ public class User implements UserDetails {
     String username;
     String password;
 
-    @OneToMany(mappedBy = "user")
-    List<Recipe> recipes;
+    @OneToMany(mappedBy = "appUser")
+    public List<Recipe> recipes;
 
-    public User(){}
+    public AppUser(){}
 
-    public User(String username, String password){
+    public AppUser(String username, String password){
         this.username = username;
         this.password = password;
     }
@@ -52,7 +52,7 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }
-    
+
     public String getUsername() {
         return this.username;
     }
@@ -62,6 +62,14 @@ public class User implements UserDetails {
     }
     public String getPassword() {
         return this.password;
+    }
+
+    public List<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(List<Recipe> recipes) {
+        this.recipes = recipes;
     }
 
     public void setId(long id) {

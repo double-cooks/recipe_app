@@ -20,13 +20,13 @@ public class Recipe {
     List<Step> steps;
 
     @ManyToOne
-    User user;
+    AppUser appUser;
 
     public Recipe(){}
 
-    public Recipe(String title, User user){
+    public Recipe(String title, AppUser appUser){
         this.title = title;
-        this.user = user;
+        this.appUser = appUser;
     }
 
     public long getId() {
@@ -45,8 +45,8 @@ public class Recipe {
         return this.title;
     }
 
-    public User getUser() {
-        return this.user;
+    public AppUser getAppUser() {
+        return this.appUser;
     }
 
     public void setId(long id) {
@@ -65,7 +65,7 @@ public class Recipe {
         this.steps = steps;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 }
