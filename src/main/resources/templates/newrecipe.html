@@ -2,10 +2,15 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/style.css" rel="stylesheet" />
     <title>Create Recipe</title>
 </head>
 <body>
-    <h1>Create Recipe</h1>
+
+    <nav th:replace="fragments/navbar :: nav"></nav>
+    <h1 class="page-title">Create Recipe</h1>
 
     <label for="postform">New Recipe</label>
     <form action="/recipes/create" method="POST" id="postform">
@@ -15,15 +20,19 @@
                 <thead>
                 <tr>
                     <th>Recipe Title</th>
+                    <th>Prep Time</th>
+                    <th>Cook Time</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
                     <td><input  type="text" name="title"/></td>
+                    <td><input  type="text" name="prep-time"/></td>
+                    <td><input  type="text" name="cook-time"/></td>
+                    <td><input type="submit"></td>
                 </tr>
                 </tbody>
             </table>
-            <input type="submit">
         </fieldset>
 
     </form>
