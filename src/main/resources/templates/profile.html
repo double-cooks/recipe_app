@@ -22,9 +22,10 @@
 
         <ul>
             <li th:each="recipe : ${recipes}">
-                <span th:text="${recipe.title}"></span>
+                <a th:href="@{/recipes/{id}(id=${recipe.id})}"><span th:text="${recipe.title}"></span></a>
             </li>
         </ul>
+        <button><a th:href="@{/recipes/create}">Add A Recipe</a></button>
 
     </body>
 

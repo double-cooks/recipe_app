@@ -12,6 +12,8 @@ public class Recipe {
     long id;
 
     String title;
+    String prepTime;
+    String cookTime;
 
     @OneToMany(mappedBy = "recipe")
     List<Ingredient> ingredients;
@@ -24,9 +26,11 @@ public class Recipe {
 
     public Recipe(){}
 
-    public Recipe(String title, AppUser appUser){
+    public Recipe(String title, String prepTime, String cookTime, AppUser appUser){
         this.title = title;
         this.appUser = appUser;
+        this.prepTime = prepTime;
+        this.cookTime = cookTime;
     }
 
     public long getId() {
@@ -48,6 +52,14 @@ public class Recipe {
     public AppUser getAppUser() {
         return this.appUser;
     }
+
+    public String getPrepTime() { return this.prepTime; }
+
+    public String getCookTime() { return this.cookTime; }
+
+    public void setCookTime(String cookTime) { this.cookTime = cookTime; }
+
+    public void setPreTime(String prepTime) { this.prepTime = prepTime; }
 
     public void setId(long id) {
         this.id = id;
