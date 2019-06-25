@@ -36,7 +36,7 @@
         <ul th:each="ingredient : ${ingredients}">
             <li><span th:text="${ingredient.quantity}"></span> <span th:text="${ingredient.name}"></span></li>
         </ul>
-    <button><a href="#">Next: Add Steps</a></button>
+    <button><a th:href="@{/recipes/{id}/steps/new(id=${id})}">Next: Add Steps</a></button>
     </body>
 
 </html>
