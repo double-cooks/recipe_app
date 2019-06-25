@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title><span th:text="${recipe.title}"></span> Ingredients</title>
+    </head>
+    <body>
+
+        <h1><span th:text="${recipe.title}"></span> Ingredients</h1>
+
+        <ul>
+            <li th:each="ingredient : ${ingredients}">
+                <span th:text="${ingredient.name}"></span>,
+                <span th:text="${ingredient.quantity}"></span>
+            </li>
+        </ul>
+    </body>
+</html>

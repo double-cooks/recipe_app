@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>My Profile</title>
+</head>
+
+    <body>
+
+        <h1>My Profile</h1>
+
+        <ul>
+            <li>Username: <span th:text="${user.username}"></span></li>
+            <li>First: <span th:text="${user.firstName}"></span></li>
+            <li>Last: <span th:text="${user.lastName}"></span></li>
+        </ul>
+
+        <h2>My Recipes</h2>
+
+        <ul>
+            <li th:each="recipe : ${recipes}">
+                <span th:text="${recipe.title}"></span>
+            </li>
+        </ul>
+
+    </body>
+
+</html>

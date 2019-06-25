@@ -17,15 +17,19 @@ public class AppUser implements UserDetails {
     @Column(unique = true)
     String username;
     String password;
+    String firstname;
+    String lastname;
 
     @OneToMany(mappedBy = "appUser")
     public List<Recipe> recipes;
 
     public AppUser(){}
 
-    public AppUser(String username, String password){
+    public AppUser(String username, String password, String firstName, String lastName){
         this.username = username;
         this.password = password;
+        this.firstname = firstName;
+        this.lastname = lastName;
     }
 
     @Override
@@ -66,6 +70,22 @@ public class AppUser implements UserDetails {
 
     public List<Recipe> getRecipes() {
         return recipes;
+    }
+
+    public String getFirstName() {
+        return this.firstname;
+    }
+
+    public String getLastName() {
+        return this.lastname;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastname = lastName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstname = firstName;
     }
 
     public void setRecipes(List<Recipe> recipes) {

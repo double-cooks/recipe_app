@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Recipe</title>
+</head>
+<body>
+    <h1>Create Recipe</h1>
+
+    <label for="postform">New Recipe</label>
+    <form action="/recipes/create" method="POST" id="postform">
+
+        <fieldset>
+            <table>
+                <thead>
+                <tr>
+                    <th>Recipe Title</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input  type="text" name="title"/></td>
+                </tr>
+                </tbody>
+            </table>
+            <input type="submit">
+        </fieldset>
+
+    </form>
+</body>
+</html>
