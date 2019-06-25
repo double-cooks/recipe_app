@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="/style.css" rel="stylesheet" />
+        <title>Confirmation</title>
+    </head>
+    <body>
+        <nav th:replace="fragments/navbar :: nav"></nav>
+        <h1>Confirmation</h1>
+
+        <h2>Recipe</h2>
+        <ul>
+            <li th:each="recipe : ${recipe}">
+                <p>Recipe <span th:text="${recipe.title}"></span></p>
+                <p>Prep time <span th:text="${recipe.prepTime}"></span></p>
+                <p>Cook time <span th:text="${recipe.cookTime}"></span></p>
+            </li>
+        </ul>
+        <ul>
+            <li th:each="ingredient : ${ingredients}">
+                <p>Ingredient <span th:text="${ingredient.name}"></span></p>
+                <p>Quantity <span th:text="${ingredient.quantity}"></span></p>
+            </li>
+        </ul>
+    </body>
+</html>
