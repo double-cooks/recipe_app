@@ -1,0 +1,9 @@
+nav {
+    background-color: lightblue !important;
+}
+
+form, .page-title {
+    margin: auto;
+    text-align: center;
+    width: 40%;
+}
