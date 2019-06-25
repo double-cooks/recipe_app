@@ -11,7 +11,7 @@ public class Step {
 
     @ManyToOne
     Recipe recipe;
-
+    @Column(unique = true)
     int stepNumber;
     String description;
 

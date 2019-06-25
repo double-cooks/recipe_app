@@ -83,7 +83,7 @@ public class RecipeController {
         Recipe recipe = recipeRepository.findById(id).get();
         m.addAttribute("recipe", recipe);
         m.addAttribute("steps", recipe.getSteps());
-        return "addStep";
+        return "addstep";
 
     }
 
