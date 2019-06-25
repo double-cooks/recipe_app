@@ -43,7 +43,7 @@ public class RecipeController {
         Recipe newRecipe = new Recipe(title, prepTime, cookTime, user);
 
         recipeRepository.save(newRecipe);
-        return new RedirectView("/recipes");
+        return new RedirectView("/recipes/"+ newRecipe.getId() + "/ingredients/new");
     }
 
     @GetMapping("/recipes/{id}/ingredients")
@@ -62,7 +62,6 @@ public class RecipeController {
         Ingredient newIngredient = new Ingredient(name, quantity, recipe);
         ingredientRepository.save(newIngredient);
 
-        return new RedirectView("/recipes");
+        return new RedirectView("/recipes/" + id + "/ingredients");
     }
 }
-
