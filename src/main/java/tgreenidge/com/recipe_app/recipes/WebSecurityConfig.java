@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Override
@@ -38,11 +38,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
 
-                //allow requests to all URLs that match the patterns even if not logged in
                 .antMatchers(HttpMethod.GET, "/*.css", "/").permitAll()
                 .antMatchers("/login", "/signup", "/logoutSuccess").permitAll()
 
-                // anything else, you must be logged in
                 .anyRequest().authenticated()
 
                 .and()

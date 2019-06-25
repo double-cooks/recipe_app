@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>All Recipes</title>
+    </head>
+    <body>
+        <h1>All Recipes</h1>
+
+        <ul>
+            <li th:each="recipe : ${recipes}">
+                <a th:href="@{/recipes/{id}/ingredients(id=${recipe.getId()})}" ><span th:text="${recipe.title}"></span></a>
+                <form th:action="@{/recipes/{id}/addToProfile(id=${recipe.getId()})}" method="post">
+                    <input type="submit" />
+                </form>
+            </li>
+        </ul>
+    </body>
+</html>
