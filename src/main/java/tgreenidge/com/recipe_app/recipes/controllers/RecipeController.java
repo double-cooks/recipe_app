@@ -32,26 +32,17 @@ public class RecipeController {
     @Autowired
     IngredientRepository ingredientRepository;
 
-    @GetMapping("/recipes")
-    public String getAllRecipes(Model m) {
-        Iterable<Recipe> recipes = recipeRepository.findAll();
-        m.addAttribute("recipes", recipes);
-
-        return "recipes";
-    }
-
     @GetMapping("/recipes/create")
-    public String getRecipeForm() {
+    public String getRecipeForm(Principal p, Model m) {
         return "newrecipe";
     }
 
     @PostMapping("/recipes/create")
-    public RedirectView createRecipe(Principal p, String title) {
+    public RedirectView createRecipe(Principal p, String title, String prepTime, String cookTime) {
         AppUser user = appUserRepository.findByUsername(p.getName());
-        Recipe newRecipe = new Recipe(title, user);
+        Recipe newRecipe = new Recipe(title, prepTime, cookTime, user);
 
         recipeRepository.save(newRecipe);
-
         return new RedirectView("/recipes");
     }
 
@@ -64,14 +55,6 @@ public class RecipeController {
         return "recipeingredients";
     }
 
-    @GetMapping("/recipes/{id}/ingredients/new")
-    public String getIngredientsForm(@PathVariable Long id, Model m) {
-        Recipe recipe = recipeRepository.findById(id).get();
-        m.addAttribute("recipe", recipe);
-        m.addAttribute("id", recipe.getId());
-
-        return "newingredients";
-    }
 
     @PostMapping("/recipes/{id}/ingredients/new")
     public RedirectView createNewIngredient(@PathVariable Long id, String name, String quantity) {
@@ -81,14 +64,5 @@ public class RecipeController {
 
         return new RedirectView("/recipes");
     }
-
-    @PostMapping("/recipes/{id}/addToProfile")
-    public RedirectView addRecipeToProfile(@PathVariable Long id, Principal p) {
-        Recipe recipe = recipeRepository.findById(id).get();
-        AppUser user = appUserRepository.findByUsername(p.getName());
-        user.getRecipes().add(recipe);
-        appUserRepository.save(user);
-
-        return new RedirectView("/profile");
-    }
 }
+
