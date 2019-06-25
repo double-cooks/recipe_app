@@ -66,6 +66,7 @@ public class RecipeController {
         return "newingredients";
     }
 
+    //recipe _id
     @GetMapping("/confirmation/{id}")
     public String getConfirmationPage(@PathVariable Long id, Model m) {
         Recipe recipe = recipeRepository.findById(id).get();
