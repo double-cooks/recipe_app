@@ -12,9 +12,11 @@ import org.springframework.web.servlet.view.RedirectView;
 import tgreenidge.com.recipe_app.recipes.models.AppUser;
 import tgreenidge.com.recipe_app.recipes.models.Ingredient;
 import tgreenidge.com.recipe_app.recipes.models.Recipe;
+import tgreenidge.com.recipe_app.recipes.models.Step;
 import tgreenidge.com.recipe_app.recipes.repositories.AppUserRepository;
 import tgreenidge.com.recipe_app.recipes.repositories.IngredientRepository;
 import tgreenidge.com.recipe_app.recipes.repositories.RecipeRepository;
+import tgreenidge.com.recipe_app.recipes.repositories.StepRepository;
 
 import java.security.Principal;
 
@@ -30,6 +32,9 @@ public class RecipeController {
     @Autowired
     IngredientRepository ingredientRepository;
 
+    @Autowired
+    StepRepository stepRepository;
+
     @GetMapping("/recipes/create")
     public String getRecipeForm(Principal p, Model m) {
         return "newrecipe";
@@ -44,11 +49,12 @@ public class RecipeController {
         return new RedirectView("/recipes/" + newRecipe.getId() + "/ingredients/new");
     }
 
-    @GetMapping("/recipes/{id}/ingredients")
+    @GetMapping("/recipes/{id}")
     public String getRecipeIngredients(@PathVariable Long id, Model m) {
         Recipe recipe = recipeRepository.findById(id).get();
         m.addAttribute("recipe", recipe);
         m.addAttribute("ingredients",recipe.getIngredients());
+        m.addAttribute("steps", recipe.getSteps());
 
         return "recipeingredients";
     }
@@ -70,5 +76,23 @@ public class RecipeController {
 
         return new RedirectView("/recipes/" + id + "/ingredients/new");
 
+    }
+
+    @GetMapping("/recipes/{id}/steps/new")
+    public String getNewStepForm(@PathVariable Long id, Model m) {
+        Recipe recipe = recipeRepository.findById(id).get();
+        m.addAttribute("recipe", recipe);
+        m.addAttribute("steps", recipe.getSteps());
+        return "addStep";
+
+    }
+
+    @PostMapping("/recipes/{id}/steps/new")
+    public RedirectView createNewStep(@PathVariable Long id, int stepNumber, String description) {
+        Recipe recipe = recipeRepository.findById(id).get();
+        Step newStep = new Step(stepNumber, description, recipe);
+        stepRepository.save(newStep);
+
+        return new RedirectView("/recipes/" + id + "/steps/new");
     }
 }
