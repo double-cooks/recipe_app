@@ -12,7 +12,6 @@
         <nav th:replace="fragments/navbar :: nav"></nav>
         <h1 class="page-title">Create Ingredient</h1>
 
-        <label for="postform">New Ingredient</label>
         <form th:action="@{/recipes/{id}/ingredients/new(id=${id})}" method="POST" id="postform">
             <fieldset>
                 <table>
@@ -37,7 +36,7 @@
         <ul th:each="ingredient : ${ingredients}">
             <li><span th:text="${ingredient.quantity}"></span> <span th:text="${ingredient.name}"></span></li>
         </ul>
-
+    <button><a th:href="@{/recipes/{id}/steps/new(id=${id})}">Next: Add Steps</a></button>
     </body>
 
 </html>
