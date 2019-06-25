@@ -17,8 +17,6 @@ import tgreenidge.com.recipe_app.recipes.repositories.IngredientRepository;
 import tgreenidge.com.recipe_app.recipes.repositories.RecipeRepository;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class RecipeController {
@@ -43,7 +41,7 @@ public class RecipeController {
         Recipe newRecipe = new Recipe(title, prepTime, cookTime, user);
 
         recipeRepository.save(newRecipe);
-        return new RedirectView("/recipes/"+ newRecipe.getId() + "/ingredients/new");
+        return new RedirectView("/recipes/" + newRecipe.getId() + "/ingredients/new");
     }
 
     @GetMapping("/recipes/{id}/ingredients")
@@ -56,12 +54,21 @@ public class RecipeController {
     }
 
 
+    @GetMapping("/recipes/{id}/ingredients/new")
+    public String getNewIngredients(@PathVariable Long id, Model m) {
+        Recipe recipe = recipeRepository.findById(id).get();
+        m.addAttribute("recipe", recipe);
+        m.addAttribute("ingredients", recipe.getIngredients());
+        return "newingredients";
+    }
+
     @PostMapping("/recipes/{id}/ingredients/new")
     public RedirectView createNewIngredient(@PathVariable Long id, String name, String quantity) {
         Recipe recipe = recipeRepository.findById(id).get();
         Ingredient newIngredient = new Ingredient(name, quantity, recipe);
         ingredientRepository.save(newIngredient);
 
-        return new RedirectView("/recipes/" + id + "/ingredients");
+        return new RedirectView("/recipes/" + id + "/ingredients/new");
+
     }
 }
