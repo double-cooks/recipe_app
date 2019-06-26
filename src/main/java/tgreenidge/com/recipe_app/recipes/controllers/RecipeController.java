@@ -48,9 +48,10 @@ public class RecipeController {
     public RedirectView createRecipe(Principal p, String title, String prepTime, String cookTime) {
         AppUser user = appUserRepository.findByUsername(p.getName());
         Recipe newRecipe = new Recipe(title, prepTime, cookTime, user);
+        boolean isInitialCreation = true;
 
         recipeRepository.save(newRecipe);
-        return new RedirectView("/recipes/" + newRecipe.getId() + "/ingredients/new");
+        return new RedirectView("/recipes/" + newRecipe.getId() + "/ingredients/new/"+isInitialCreation);
     }
 
     @GetMapping("/recipes/{id}")
@@ -102,7 +103,7 @@ public class RecipeController {
         if (!isInitialCreation) {
             return new RedirectView("/recipes/edit2/" + id);
         }
-        return new RedirectView("/recipes/" + id + "/ingredients/new" + isInitialCreation);
+        return new RedirectView("/recipes/" + id + "/ingredients/new/" + isInitialCreation);
     }
     //recipe _id
     @GetMapping("/confirmation/{id}")
