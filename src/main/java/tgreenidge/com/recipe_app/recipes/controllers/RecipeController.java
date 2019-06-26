@@ -60,7 +60,7 @@ public class RecipeController {
             m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
         }
 
-        return "recipeingredients";
+        return "recipecontents";
     }
 
     @GetMapping("/recipes/{id}/ingredients/new")
@@ -154,7 +154,7 @@ public class RecipeController {
             ingredientRepository.save(ingredientToUpdate);
         }
 
-        return new RedirectView("/recipes/" + id);
+        return new RedirectView("/recipes/edit2/" + id);
     }
 
     @PostMapping("/recipes/{id}/ingredients/{id2}/delete")
@@ -164,7 +164,7 @@ public class RecipeController {
 
         ingredientRepository.delete(ingredientToDelete);
 
-        return new RedirectView("/recipes/" + id);
+        return new RedirectView("/recipes/edit2/" + id);
     }
 
     @GetMapping("/recipes/{id}/steps/{id2}/update")
@@ -197,7 +197,7 @@ public class RecipeController {
             stepRepository.save(stepToUpdate);
         }
 
-        return new RedirectView("/recipes/" + id);
+        return new RedirectView("/recipes/edit2/" + id);
     }
 
     @PostMapping("/recipes/{id}/steps/{id2}/delete")
@@ -207,7 +207,7 @@ public class RecipeController {
 
         stepRepository.delete(stepToDelete);
 
-        return new RedirectView("/recipes/" + id);
+        return new RedirectView("/recipes/edit2/" + id);
     }
 
     @GetMapping("/recipe/edit/{id}")
