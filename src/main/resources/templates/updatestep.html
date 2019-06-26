@@ -6,26 +6,26 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/fontawesome.min.css">
-    <title>Update Ingredient</title>
+    <title>Create Ingredient</title>
 </head>
 
 <body>
 <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
-<h1 class="page-title">Update Ingredient</h1>
+<h1 class="page-title">Update Step</h1>
 
-<form th:action="@{/recipes/{id}/ingredients/{id2}/update(id=${recipe.getId()}, id2=${ingredient.getId()})}" method="POST" id="postform">
+<form th:action="@{/recipes/{id}/steps/{id2}/update(id=${recipe.getId()}, id2=${step.getId()})}" method="POST" id="postform">
     <fieldset>
         <table>
             <thead>
             <tr>
-                <th>Name</th>
-                <th>Quantity</th>
+                <th>Step Number</th>
+                <th>Description</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td><input  type="text" name="name"/></td>
-                <td><input  type="text" name="quantity"/></td>
+                <td><input  type="text" name="stepNumber"/></td>
+                <td><input  type="text" name="description"/></td>
             </tr>
             </tbody>
         </table>
