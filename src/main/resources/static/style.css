@@ -77,9 +77,25 @@ form, .page-title {
     background-color: lightblue;
 }
 
+button, [type="submit"] {
+    border-radius: 7px;
+    padding: 15px;
+    margin-bottom: 30px;
+    background-color: lightblue;
+    color: white;
+}
+
+[name="delete"] {
+    background-color: red;
+}
+
 #add-link {
     font-size: 18px;
     padding: 10px;
+    color: white;
+}
+
+a {
     color: white;
 }
 
