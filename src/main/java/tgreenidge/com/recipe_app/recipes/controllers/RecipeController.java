@@ -56,9 +56,10 @@ public class RecipeController {
     @GetMapping("/recipes/{id}")
     public String getRecipeIngredients(@PathVariable Long id, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
+        List<Step> steps = recipe.getSteps().stream().sorted(Comparator.comparing(Step::getStepNumber)).collect(Collectors.toList());
         m.addAttribute("recipe", recipe);
         m.addAttribute("ingredients",recipe.getIngredients());
-        m.addAttribute("steps", recipe.getSteps());
+        m.addAttribute("steps", steps);
         if (p != null) {
             m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
         }
@@ -69,9 +70,11 @@ public class RecipeController {
     @GetMapping("/recipes/edit2/{id}")
     public String getEditRecipeIngredients(@PathVariable Long id, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
+        List<Step> steps = recipe.getSteps().stream().sorted(Comparator.comparing(Step::getStepNumber)).collect(Collectors.toList());
+        
         m.addAttribute("recipe", recipe);
         m.addAttribute("ingredients",recipe.getIngredients());
-        m.addAttribute("steps", recipe.getSteps());
+        m.addAttribute("steps", steps);
         if (p != null) {
             m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
         }
@@ -215,7 +218,7 @@ public class RecipeController {
             stepToUpdate.setStepNumber(stepNumber);
             flag = true;
         }
-        if(stepToUpdate.getDescription().equals(description)) {
+        if(!stepToUpdate.getDescription().equals(description)) {
             stepToUpdate.setDescription(description);
             flag = true;
         }
