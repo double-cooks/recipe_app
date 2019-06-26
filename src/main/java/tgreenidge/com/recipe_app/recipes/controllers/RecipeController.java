@@ -115,7 +115,7 @@ public class RecipeController {
     }
 
     @PostMapping("/recipe/delete/{id}")
-        public RedirectView getDelete(@PathVariable Long id) {
+    public RedirectView getDelete(@PathVariable Long id) {
         recipeRepository.deleteById(id);
         return new RedirectView("/profile");
     }
@@ -147,10 +147,12 @@ public class RecipeController {
     }
 
     @GetMapping("/recipes/{id}/ingredients/{id2}/update")
-    public String getEditIngredientForm(@PathVariable Long id, @PathVariable Long id2, Model m) {
+    public String getEditIngredientForm(@PathVariable Long id, @PathVariable Long id2, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
         Ingredient ingredientToUpdate = ingredientRepository.findById(id2).get();
-
+        if (p != null) {
+            m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
+        }
         m.addAttribute("recipe", recipe);
         m.addAttribute("ingredient", ingredientToUpdate);
 
@@ -190,9 +192,12 @@ public class RecipeController {
     }
 
     @GetMapping("/recipes/{id}/steps/{id2}/update")
-    public String getEditStepsForm(@PathVariable Long id, @PathVariable Long id2, Model m) {
+    public String getEditStepsForm(@PathVariable Long id, @PathVariable Long id2, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
         Step stepToUpdate = stepRepository.findById(id2).get();
+        if (p != null) {
+            m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
+        }
 
         m.addAttribute("recipe", recipe);
         m.addAttribute("step", stepToUpdate);
@@ -233,11 +238,14 @@ public class RecipeController {
     }
 
     @GetMapping("/recipe/edit/{id}")
-    public String getRecipeEdit(@PathVariable Long id, Model m) {
+    public String getRecipeEdit(@PathVariable Long id, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
         m.addAttribute("recipe", recipe);
         m.addAttribute("ingredients", recipe.getIngredients());
         m.addAttribute("steps", recipe.getSteps());
+        if (p != null) {
+            m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
+        }
         return "editrecipe";
     }
 
