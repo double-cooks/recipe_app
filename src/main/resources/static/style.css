@@ -2,10 +2,15 @@ nav {
     background-color: lightblue !important;
 }
 
-form {
+form, .page-title {
     margin: auto;
     text-align: center;
     width: 40%;
+}
+
+.page-title {
+    margin-top: 15%;
+    padding-bottom: 20px;
 }
 
 #hero-text {
@@ -16,6 +21,10 @@ form {
 
 #hero-text p {
     font-size: 20px;
+}
+
+#login {
+    text-transform: uppercase;
 }
 
 .center {
