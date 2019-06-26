@@ -9,13 +9,19 @@
     </head>
     <body>
         <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
-        <h1 class="page-title"><span th:text="${recipe.title}"></span> Ingredients</h1>
+        <h1 class="page-title"><span th:text="${recipe.title}"></span> Recipe</h1>
 
+        <h4>Ingredients</h4>
         <ul>
             <li th:each="ingredient : ${ingredients}">
-                <span th:text="${ingredient.name}"></span>,
                 <span th:text="${ingredient.quantity}"></span>
+                <span th:text="${ingredient.name}"></span>
             </li>
+        </ul>
+
+        <h4>Steps</h4>
+        <ul th:each="step : ${steps}">
+            <li><span th:text="${step.stepNumber}"></span>. <span th:text="${step.description}"></span></li>
         </ul>
     </body>
 </html>
