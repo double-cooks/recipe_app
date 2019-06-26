@@ -33,7 +33,11 @@
     </form>
     <h2>Steps</h2>
     <ul th:each="step : ${steps}">
-        <li><span th:text="${step.stepNumber}"></span> <span th:text="${step.description}"></span></li>
+        <li><span th:text="${step.stepNumber}"></span> <span th:text="${step.description}"></span>
+            <button>
+                <a th:href="@{/recipes/{id}/steps/{id2}/update/true(id=${id},id2=${step.getId()})}">Edit</a>
+            </button>
+        </li>
     </ul>
     <button><a th:href="@{/recipes/{id}(id=${recipe.getId()})}">Save & Review</a></button>
 </body>
