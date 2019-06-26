@@ -11,7 +11,7 @@
     <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
     <h1 class="page-title">Add Step</h1>
 
-    <form th:action="@{/recipes/{id}/steps/new(id=${id})}" method="POST" id="postform">
+    <form th:action="@{/recipes/{id}/steps/new/{isInitialCreation}(id=${id},isInitialCreation=${isInitialCreation})}" method="POST" id="postform">
         <fieldset>
             <table>
                 <thead>

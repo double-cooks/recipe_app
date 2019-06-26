@@ -5,6 +5,8 @@
             <li><a th:unless="${user}" href="/login">Log in</a></li>
             <li><a th:unless="${user}" href="/signup">Sign Up</a></li>
             <li><a th:if="${user}" href="/profile">Profile</a></li>
+            <li><a th:if="${user}" href="/recipes/create">Add Recipe</a></li>
+            <li><a th:if="${user}" href="/aboutus">About Us</a></li>
             <li><a th:if="${user}" href="/logout">Log out</a></li>
 
         </ul>

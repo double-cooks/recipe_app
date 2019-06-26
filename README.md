@@ -19,6 +19,9 @@ http://recipe/edit/id
 
 http://recipe/delete/id
 - Delete route to remove a recipe, its ingredients and steps
+
+http://recipe/aboutus
+- About Us page
 ***
 
 * [Notes](#Notes)
