@@ -2,7 +2,12 @@ package tgreenidge.com.recipe_app.recipes.models;
 
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 @Entity
 public class Recipe {
@@ -79,5 +84,19 @@ public class Recipe {
 
     public void setAppUser(AppUser appUser) {
         this.appUser = appUser;
+    }
+
+    public String toString(){
+//        String ingredients = getIngredients().stream()
+//                .collect(Collectors.joining(","));
+//        String steps = String.join("," , getSteps());
+        Gson gson = new Gson();
+
+        String recipeJsonString = gson.toJson(getSteps());
+        System.out.println(recipeJsonString);
+//        return "{\"title\":\"" + getTitle() + "\",\"prepTime\":\"" + getPrepTime() + "\",\"cookTime\":\"" + getCookTime() +
+//                "\",\"ingredients\":\"[" + ingredients + "]\"" + "\"}";
+        return recipeJsonString;
+
     }
 }
