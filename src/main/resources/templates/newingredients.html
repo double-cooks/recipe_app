@@ -10,7 +10,7 @@
     </head>
 
     <body>
-        <nav th:replace="fragments/navbar :: nav"></nav>
+        <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
         <h1 class="page-title">Create Ingredient</h1>
 
         <form th:action="@{/recipes/{id}/ingredients/new(id=${id})}" method="POST" id="postform">

@@ -8,7 +8,7 @@
         <title>All Recipes</title>
     </head>
     <body>
-        <nav th:replace="fragments/navbar :: nav"></nav>
+        <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
         <h1 class="page-title">All Recipes</h1>
 
         <ul>

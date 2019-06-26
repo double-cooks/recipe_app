@@ -35,12 +35,18 @@ public class AppUserController {
     BCryptPasswordEncoder encoder;
 
     @GetMapping("/")
-    public String getRootPath() {
+    public String getRootPath(Principal p, Model m) {
+        if (p != null) {
+            m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
+        }
         return "helloGreeting";
     }
 
     @GetMapping("/signup")
-    public String getSignup() {
+    public String getSignup(Principal p , Model m) {
+        if (p != null) {
+            m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
+        }
         return "signup";
     }
 
@@ -54,12 +60,18 @@ public class AppUserController {
     }
 
     @GetMapping("/login")
-    public String getLogin() {
+    public String getLogin(Principal p, Model m) {
+        if (p != null) {
+            m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
+        }
         return "login";
     }
 
     @GetMapping("/logoutSuccess")
-    public String getLogout() {
+    public String getLogout(Principal p, Model m) {
+        if (p != null) {
+            m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
+        }
         return "logoutsuccess";
     }
 
@@ -70,9 +82,10 @@ public class AppUserController {
         Iterable<AppUser> usersToFollowIterable = appUserRepository.findAll();
 
         m.addAttribute("recipes", recipes);
-        m.addAttribute("user", user);
         m.addAttribute("principal", p.getName());
-
+        if (p != null) {
+            m.addAttribute("user", user);
+        }
 
         return "profile";
     }

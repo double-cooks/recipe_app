@@ -35,6 +35,9 @@ public class RecipeController {
 
     @GetMapping("/recipes/create")
     public String getRecipeForm(Principal p, Model m) {
+        if (p != null) {
+            m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
+        }
         return "newrecipe";
     }
 
@@ -48,30 +51,39 @@ public class RecipeController {
     }
 
     @GetMapping("/recipes/{id}")
-    public String getRecipeIngredients(@PathVariable Long id, Model m) {
+    public String getRecipeIngredients(@PathVariable Long id, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
         m.addAttribute("recipe", recipe);
         m.addAttribute("ingredients",recipe.getIngredients());
         m.addAttribute("steps", recipe.getSteps());
+        if (p != null) {
+            m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
+        }
 
         return "recipeingredients";
     }
 
 
     @GetMapping("/recipes/{id}/ingredients/new")
-    public String getNewIngredients(@PathVariable Long id, Model m) {
+    public String getNewIngredients(@PathVariable Long id, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
         m.addAttribute("recipe", recipe);
         m.addAttribute("ingredients", recipe.getIngredients());
+        if (p != null) {
+            m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
+        }
         return "newingredients";
     }
 
     //recipe _id
     @GetMapping("/confirmation/{id}")
-    public String getConfirmationPage(@PathVariable Long id, Model m) {
+    public String getConfirmationPage(@PathVariable Long id, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
         m.addAttribute("recipe", recipe);
         m.addAttribute("ingredients", recipe.getIngredients());
+        if (p != null) {
+            m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
+        }
         return "confirmation";
     }
 
@@ -86,10 +98,13 @@ public class RecipeController {
     }
 
     @GetMapping("/recipes/{id}/steps/new")
-    public String getNewStepForm(@PathVariable Long id, Model m) {
+    public String getNewStepForm(@PathVariable Long id, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
         m.addAttribute("recipe", recipe);
         m.addAttribute("steps", recipe.getSteps());
+        if (p != null) {
+            m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
+        }
         return "addstep";
 
     }
@@ -102,4 +117,6 @@ public class RecipeController {
 
         return new RedirectView("/recipes/" + id + "/steps/new");
     }
+
+
 }

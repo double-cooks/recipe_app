@@ -1,10 +1,13 @@
-<nav>
+<nav th:fragment="nav(user)">
     <div class="nav-wrapper">
         <a href="/" class="brand-logo"><i class="material-icons">home</i>Home</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="/login">Log In</a></li>
-            <li><a href="/signup">Sign Up</a></li>
+            <li><a th:unless="${user}" href="/login">Log in</a></li>
+            <li><a th:unless="${user}" href="/signup">Sign Up</a></li>
             <li><a href="/">Home</a></li>
+            <li><a th:if="${user}" href="/profile">Profile</a></li>
+            <li><a th:if="${user}" href="/logout">Log out</a></li>
+
         </ul>
     </div>
 </nav>
