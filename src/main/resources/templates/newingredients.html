@@ -39,7 +39,7 @@
 
             </li>
         </ul>
-    <button><a th:href="@{/recipes/{id}/steps/new(id=${id})}">Next: Add Steps</a></button>
+    <button><a th:href="@{/recipes/{id}/steps/new/{isInitialCreation}(id=${id},isInitialCreation=true)}">Next: Add Steps</a></button>
     </body>
 
 </html>
