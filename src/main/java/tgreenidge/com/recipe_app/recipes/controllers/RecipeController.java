@@ -53,8 +53,21 @@ public class RecipeController {
         return new RedirectView("/recipes/" + newRecipe.getId() + "/ingredients/new");
     }
 
-    @GetMapping("/recipes/edit2/{id}")
+    @GetMapping("/recipes/{id}")
     public String getRecipeIngredients(@PathVariable Long id, Model m, Principal p) {
+        Recipe recipe = recipeRepository.findById(id).get();
+        m.addAttribute("recipe", recipe);
+        m.addAttribute("ingredients",recipe.getIngredients());
+        m.addAttribute("steps", recipe.getSteps());
+        if (p != null) {
+            m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
+        }
+
+        return "showRecipe";
+    }
+
+    @GetMapping("/recipes/edit2/{id}")
+    public String getEditRecipeIngredients(@PathVariable Long id, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
         m.addAttribute("recipe", recipe);
         m.addAttribute("ingredients",recipe.getIngredients());
@@ -66,8 +79,8 @@ public class RecipeController {
         return "recipecontents";
     }
 
-    @GetMapping("/recipes/{id}/ingredients/new")
-    public String getNewIngredients(@PathVariable Long id, Model m, Principal p) {
+    @GetMapping("/recipes/{id}/ingredients/new/{isInitialCreation}")
+    public String getNewIngredients(@PathVariable Long id, @PathVariable boolean isInitialCreation, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
         m.addAttribute("recipe", recipe);
         m.addAttribute("ingredients", recipe.getIngredients());
@@ -77,20 +90,17 @@ public class RecipeController {
         return "newingredients";
     }
 
-    @GetMapping("/recipes/{id}")
-    public String getRecipe(@PathVariable Long id, Model m, Principal p) {
+    @PostMapping("/recipes/{id}/ingredients/new/{isInitialCreation}")
+    public RedirectView createNewIngredient(@PathVariable Long id, @PathVariable boolean isInitialCreation, String name, String quantity) {
         Recipe recipe = recipeRepository.findById(id).get();
-        List<Step> steps = recipe.getSteps().stream().sorted(Comparator.comparing(Step::getStepNumber)).collect(Collectors.toList());
-        m.addAttribute("recipe", recipe);
-        m.addAttribute("ingredients",recipe.getIngredients());
-        m.addAttribute("steps", steps);
-        if (p != null) {
-            m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
+        Ingredient newIngredient = new Ingredient(name, quantity, recipe);
+        ingredientRepository.save(newIngredient);
+
+        if (!isInitialCreation) {
+            return new RedirectView("/recipes/edit2/" + id);
         }
-
-        return "showRecipe";
+        return new RedirectView("/recipes/" + id + "/ingredients/new" + isInitialCreation);
     }
-
     //recipe _id
     @GetMapping("/confirmation/{id}")
     public String getConfirmationPage(@PathVariable Long id, Model m, Principal p) {
@@ -110,34 +120,29 @@ public class RecipeController {
         return new RedirectView("/profile");
     }
 
-    @PostMapping("/recipes/{id}/ingredients/new")
-    public RedirectView createNewIngredient(@PathVariable Long id, String name, String quantity) {
-        Recipe recipe = recipeRepository.findById(id).get();
-        Ingredient newIngredient = new Ingredient(name, quantity, recipe);
-        ingredientRepository.save(newIngredient);
 
-        return new RedirectView("/recipes/" + id + "/ingredients/new");
-
-    }
-
-    @GetMapping("/recipes/{id}/steps/new")
-    public String getNewStepForm(@PathVariable Long id, Model m, Principal p) {
+    @GetMapping("/recipes/{id}/steps/new/{isInitialCreation}")
+    public String getNewStepForm(@PathVariable Long id, @PathVariable boolean isInitialCreation, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
         m.addAttribute("recipe", recipe);
         m.addAttribute("steps", recipe.getSteps());
         if (p != null) {
             m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
         }
+
         return "addstep";
 
     }
 
     @PostMapping("/recipes/{id}/steps/new")
-    public RedirectView createNewStep(@PathVariable Long id, int stepNumber, String description) {
+    public RedirectView createNewStep(@PathVariable Long id, @PathVariable boolean isInitialCreation, int stepNumber, String description) {
         Recipe recipe = recipeRepository.findById(id).get();
         Step newStep = new Step(stepNumber, description, recipe);
         stepRepository.save(newStep);
 
+        if(!isInitialCreation) {
+            return new RedirectView("/recipes/edit2/" + id);
+        }
         return new RedirectView("/recipes/" + id + "/steps/new");
     }
 
