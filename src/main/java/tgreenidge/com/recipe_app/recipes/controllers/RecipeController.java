@@ -60,7 +60,7 @@ public class RecipeController {
             m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
         }
 
-        return "recipeingredients";
+        return "recipecontents";
     }
 
     @GetMapping("/recipes/{id}/ingredients/new")
@@ -154,7 +154,7 @@ public class RecipeController {
             ingredientRepository.save(ingredientToUpdate);
         }
 
-        return new RedirectView("/recipes/" + id);
+        return new RedirectView("/recipes/edit2/" + id);
     }
 
     @PostMapping("/recipes/{id}/ingredients/{id2}/delete")
@@ -164,7 +164,50 @@ public class RecipeController {
 
         ingredientRepository.delete(ingredientToDelete);
 
-        return new RedirectView("/recipes/" + id);
+        return new RedirectView("/recipes/edit2/" + id);
+    }
+
+    @GetMapping("/recipes/{id}/steps/{id2}/update")
+    public String getEditStepsForm(@PathVariable Long id, @PathVariable Long id2, Model m) {
+        Recipe recipe = recipeRepository.findById(id).get();
+        Step stepToUpdate = stepRepository.findById(id2).get();
+
+        m.addAttribute("recipe", recipe);
+        m.addAttribute("step", stepToUpdate);
+
+        return "updatestep";
+
+    }
+
+    @PostMapping("/recipes/{id}/steps/{id2}/update")
+    public RedirectView editStep(@PathVariable Long id, @PathVariable Long id2, int stepNumber, String description, Model m) {
+        Recipe recipe = recipeRepository.findById(id).get();
+        Step stepToUpdate = stepRepository.findById(id2).get();
+        boolean flag = false;
+        if(stepToUpdate.getStepNumber() != stepNumber) {
+            stepToUpdate.setStepNumber(stepNumber);
+            flag = true;
+        }
+        if(stepToUpdate.getDescription().equals(description)) {
+            stepToUpdate.setDescription(description);
+            flag = true;
+        }
+
+        if(flag) {
+            stepRepository.save(stepToUpdate);
+        }
+
+        return new RedirectView("/recipes/edit2/" + id);
+    }
+
+    @PostMapping("/recipes/{id}/steps/{id2}/delete")
+    public RedirectView deleteStep(@PathVariable Long id, @PathVariable Long id2, Model m) {
+        Recipe recipe = recipeRepository.findById(id).get();
+        Step stepToDelete = stepRepository.findById(id2).get();
+
+        stepRepository.delete(stepToDelete);
+
+        return new RedirectView("/recipes/edit2/" + id);
     }
 
     @GetMapping("/recipe/edit/{id}")
