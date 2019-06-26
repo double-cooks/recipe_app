@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/fontawesome.min.css">
+    <title>Create Ingredient</title>
+</head>
+
+<body>
+<nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
+<h1 class="page-title">Update Ingredient</h1>
+
+<form th:action="@{/recipes/{id}/ingredients/{id2}/saveUpdate(id=${recipe.getId()}, id2=${ingredient.getId()})}" method="POST" id="postform">
+    <fieldset>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><input  type="text" name="name"/></td>
+                <td><input  type="text" name="quantity"/></td>
+            </tr>
+            </tbody>
+        </table>
+        <input type="submit">
+    </fieldset>
+
+</form>
+<h2>Ingredients</h2>
+<ul th:each="ingredient : ${ingredients}">
+    <li><span th:text="${ingredient.quantity}"></span> <span th:text="${ingredient.name}"></span><span><i class="far fa-times-circle"></i></span>
+
+    </li>
+</ul>
+</body>
+
+</html>

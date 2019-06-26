@@ -63,7 +63,6 @@ public class RecipeController {
         return "recipeingredients";
     }
 
-
     @GetMapping("/recipes/{id}/ingredients/new")
     public String getNewIngredients(@PathVariable Long id, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
@@ -118,5 +117,47 @@ public class RecipeController {
         return new RedirectView("/recipes/" + id + "/steps/new");
     }
 
+    @GetMapping("/recipes/{id}/ingredients/{id2}/update")
+    public String getEditIngredientForm(@PathVariable Long id, @PathVariable Long id2, Model m) {
+        Recipe recipe = recipeRepository.findById(id).get();
+        Ingredient ingredientToUpdate = ingredientRepository.findById(id2).get();
+
+        m.addAttribute("recipe", recipe);
+        m.addAttribute("ingredient", ingredientToUpdate);
+
+        return "updateingredient";
+
+    }
+
+    @PostMapping("/recipes/{id}/ingredients/{id2}/saveUpdate")
+    public RedirectView editIngredient(@PathVariable Long id, @PathVariable Long id2, String name, String quantity, Model m) {
+        Recipe recipe = recipeRepository.findById(id).get();
+        Ingredient ingredientToUpdate = ingredientRepository.findById(id2).get();
+        boolean flag = false;
+        if(!ingredientToUpdate.getName().equals(name)) {
+            ingredientToUpdate.setName(name);
+            flag = true;
+        }
+        if(!ingredientToUpdate.getQuantity().equals(quantity)) {
+            ingredientToUpdate.setQuantity(quantity);
+            flag = true;
+        }
+
+        if(flag) {
+            ingredientRepository.save(ingredientToUpdate);
+        }
+
+        return new RedirectView("/recipes/" + id);
+    }
+
+    @PostMapping("/recipes/{id}/ingredients/{id2}/delete")
+    public RedirectView deleteIngredient(@PathVariable Long id, @PathVariable Long id2, Model m) {
+        Recipe recipe = recipeRepository.findById(id).get();
+        Ingredient ingredientToDelete = ingredientRepository.findById(id2).get();
+
+        ingredientRepository.delete(ingredientToDelete);
+
+        return new RedirectView("/recipes/" + id);
+    }
 
 }

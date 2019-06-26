@@ -16,9 +16,20 @@
             <li th:each="ingredient : ${ingredients}">
                 <span th:text="${ingredient.quantity}"></span>
                 <span th:text="${ingredient.name}"></span>
+                <button>
+                    <a
+                            th:href="@{/recipes/{id}/ingredients/{id2}/update(id=${recipe.getId()},id2=${ingredient.getId()})}"
+                    >Edit
+                    </a>
+                </button>
+
+                <form method="POST">
+                    <button th:formaction="@{/recipes/{id}/ingredients/{id2}/delete(id=${recipe.getId()},id2=${ingredient.getId()})}">
+                        Delete
+                    </button>
+                </form>
             </li>
         </ul>
-
         <h4>Steps</h4>
         <ul th:each="step : ${steps}">
             <li><span th:text="${step.stepNumber}"></span>. <span th:text="${step.description}"></span></li>
