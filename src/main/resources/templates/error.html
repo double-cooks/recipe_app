@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/style.css" rel="stylesheet" />
+    <title>Error!</title>
+</head>
+
+<body>
+    <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
+    <h1 class="error-title">404 Error!</h1>
+    <img class="error-image" src="https://media.giphy.com/media/66H4XkI1OWAOA/giphy.gif" />
+
+</body>
+
+</html>
