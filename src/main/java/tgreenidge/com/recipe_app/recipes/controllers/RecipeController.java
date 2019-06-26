@@ -80,10 +80,17 @@ public class RecipeController {
         Recipe recipe = recipeRepository.findById(id).get();
         m.addAttribute("recipe", recipe);
         m.addAttribute("ingredients", recipe.getIngredients());
+        m.addAttribute("steps", recipe.getSteps());
         if (p != null) {
             m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
         }
         return "confirmation";
+    }
+
+    @PostMapping("/recipe/delete/{id}")
+        public RedirectView getDelete(@PathVariable Long id) {
+        recipeRepository.deleteById(id);
+        return new RedirectView("/profile");
     }
 
     @PostMapping("/recipes/{id}/ingredients/new")
@@ -160,4 +167,28 @@ public class RecipeController {
         return new RedirectView("/recipes/" + id);
     }
 
+    @GetMapping("/recipe/edit/{id}")
+    public String getRecipeEdit(@PathVariable Long id, Model m) {
+        Recipe recipe = recipeRepository.findById(id).get();
+        m.addAttribute("recipe", recipe);
+        m.addAttribute("ingredients", recipe.getIngredients());
+        m.addAttribute("steps", recipe.getSteps());
+        return "editrecipe";
+    }
+
+    @PostMapping("/recipe/edit/{id}")
+    public RedirectView getEdit(@PathVariable Long id, Principal p, String title, String prepTime, String cookTime,
+                                String name, String quantity) {
+        recipeRepository.deleteById(id);
+
+        AppUser user = appUserRepository.findByUsername(p.getName());
+        Recipe newRecipe = new Recipe(title, prepTime, cookTime, user);
+        recipeRepository.save(newRecipe);
+
+        Recipe recipe = recipeRepository.findById(newRecipe.getId()).get();
+        Ingredient newIngredient = new Ingredient(name, quantity, recipe);
+        ingredientRepository.save(newIngredient);
+
+        return new RedirectView("/profile");
+    }
 }
