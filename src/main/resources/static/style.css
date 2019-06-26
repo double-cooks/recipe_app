@@ -7,3 +7,31 @@ form, .page-title {
     text-align: center;
     width: 40%;
 }
+
+.page-title {
+    margin-top: 15%;
+    padding-bottom: 20px;
+}
+
+#hero-text {
+    margin: 0 auto;
+    margin-top: 20%;
+    text-align: center;
+}
+
+#hero-text p {
+    font-size: 20px;
+}
+
+#login {
+    text-transform: uppercase;
+}
+
+.center {
+    text-align: center;
+}
+
+.nav-wrapper {
+    padding-left: 20px;
+    text-transform: uppercase;
+}

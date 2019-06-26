@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/style.css" rel="stylesheet" />
+    <title>Recipe view</title>
+</head>
+<body>
+    <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
+
+    <h1 class="page-title" th:text="${recipe.title}"></h1>
+    <p><strong>Prep time: </strong><span th:text="${recipe.getPrepTime()}"></span></p>
+    <p><strong>Cook time: </strong><span th:text="${recipe.getCookTime()}"></span></p>
+
+    <h3>Ingredients</h3>
+
+    <ul th:each="ingredient: ${ingredients}">
+        <li><span th:text="${ingredient.quantity} "></span> <span></span><span th:text="${ingredient.name}"></span></li>
+    </ul>
+
+    <h3>Steps</h3>
+    <ul th:each="step: ${steps}">
+        <li th:text="${step.description}"></li>
+    </ul>
+
+    <button><a th:href="@{/recipes/edit2/{id}(id=${recipe.id})}">Edit Recipe</a></button>
+    <form th:action="@{/recipe/delete/} + ${recipe.id}" method="POST" id="postform">
+        <input type="submit" name="delete" value="Delete Recipe" />
+    </form>
+    <button><a th:href="@{/profile}">My Profile</a></button>
+
+
+</body>
+</html>

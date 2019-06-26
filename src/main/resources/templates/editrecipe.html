@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="/style.css" rel="stylesheet" />
+        <title>Edit</title>
+    </head>
+    <body>
+        <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
+
+        <h2 class="center">Recipe edit</h2>
+
+        <form th:action="@{/recipe/edit/} + ${recipe.id}" method="POST" id="postform">
+            <fieldset>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Recipe Title</th>
+                        <th>Prep Time</th>
+                        <th>Cook Time</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><input th:value="${recipe.title}"  type="text" name="title"/></td>
+                        <td><input th:value="${recipe.prepTime}" type="text" name="prepTime"/></td>
+                        <td><input th:value="${recipe.cookTime}" type="text" name="cookTime"/></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+
+            <fieldset>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Ingredients</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="ingredient : ${ingredients}">
+                        <td><input th:value="${ingredient.quantity}" type="text" name="quantity"/></td>
+                        <td><input th:value="${ingredient.name}" type="text" name="name"/></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+
+            <fieldset>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Step Number</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr  th:each="step : ${steps}">
+                        <td><input th:value="${step.stepNumber}"  type="number" name="stepNumber"/></td>
+                        <td><input th:value="${step.description}" type="text" name="description"/></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <tr><td><input type="submit" value="Update recipe"></td></tr>
+            </fieldset>
+        </form>
+    </body>
+</html>

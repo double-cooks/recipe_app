@@ -39,7 +39,7 @@ public class AppUserController {
         if (p != null) {
             m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
         }
-        return "helloGreeting";
+        return "index";
     }
 
     @GetMapping("/signup")
