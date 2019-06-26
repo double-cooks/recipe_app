@@ -134,7 +134,7 @@ public class RecipeController {
 
     }
 
-    @PostMapping("/recipes/{id}/steps/new")
+    @PostMapping("/recipes/{id}/steps/new/{isInitialCreation}")
     public RedirectView createNewStep(@PathVariable Long id, @PathVariable boolean isInitialCreation, int stepNumber, String description) {
         Recipe recipe = recipeRepository.findById(id).get();
         Step newStep = new Step(stepNumber, description, recipe);
@@ -143,7 +143,7 @@ public class RecipeController {
         if(!isInitialCreation) {
             return new RedirectView("/recipes/edit2/" + id);
         }
-        return new RedirectView("/recipes/" + id + "/steps/new");
+        return new RedirectView("/recipes/" + id + "/steps/new/" + isInitialCreation);
     }
 
     @GetMapping("/recipes/{id}/ingredients/{id2}/update")
