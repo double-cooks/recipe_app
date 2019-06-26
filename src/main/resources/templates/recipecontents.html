@@ -11,6 +11,9 @@
         <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
         <h1 class="page-title"><span th:text="${recipe.title}"></span> Recipe</h1>
 
+        <p><strong>Prep time: </strong><span th:text="${recipe.getPrepTime()}"></span></p>
+        <p><strong>Cook time: </strong><span th:text="${recipe.getCookTime()}"></span></p>
+        
         <h4>Ingredients</h4>
         <ul>
             <li th:each="ingredient : ${ingredients}">
