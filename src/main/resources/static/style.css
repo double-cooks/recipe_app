@@ -1,3 +1,7 @@
+#recipe {
+    text-align: center;
+}
+
 nav {
     background-color: lightblue !important;
 }
@@ -101,6 +105,10 @@ form, .page-title {
     padding: 15px;
 }
 
+#recipe-title {
+    margin-top: 5%;
+}
+
 .about-wrapper {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -133,4 +141,3 @@ form, .page-title {
 .error-image {
     margin-left: 35%
 }
-
