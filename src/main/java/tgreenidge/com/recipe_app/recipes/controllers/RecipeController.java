@@ -80,20 +80,16 @@ public class RecipeController {
         Recipe recipe = recipeRepository.findById(id).get();
         m.addAttribute("recipe", recipe);
         m.addAttribute("ingredients", recipe.getIngredients());
+        m.addAttribute("steps", recipe.getSteps());
         if (p != null) {
             m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
         }
         return "confirmation";
     }
 
-    @GetMapping("/recipe/delete/{id}")
-    public String getDelete(@PathVariable Long id, Model m) {
-        recipeRepository.deleteById(id);
-        return "confirmation";
-    }
-
     @PostMapping("/recipe/delete/{id}")
-    public RedirectView getAfterDelete() {
+        public RedirectView getDelete(@PathVariable Long id) {
+        recipeRepository.deleteById(id);
         return new RedirectView("/profile");
     }
 
@@ -170,5 +166,4 @@ public class RecipeController {
 
         return new RedirectView("/recipes/" + id);
     }
-
 }

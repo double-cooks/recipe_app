@@ -9,23 +9,9 @@
     </head>
     <body>
         <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
-        <h1>Confirmation</h1>
 
         <h2>Recipe review</h2>
-        <ul>
-<!--            <li th:each="recipe : ${recipe}">-->
-<!--                <p>Recipe <span th:text="${recipe.title}"></span></p>-->
-<!--                <p>Prep time <span th:text="${recipe.prepTime}"></span></p>-->
-<!--                <p>Cook time <span th:text="${recipe.cookTime}"></span></p>-->
-<!--            </li>-->
-        </ul>
-        <ul>
-<!--            <li th:each="ingredient : ${ingredients}">-->
-
-<!--                <p><span th:text="${ingredient.quantity}"></span><span> </span><span th:text="${ingredient.name}"></span></p>-->
-
-            </li>
-        </ul>
+        <fieldset>
         <table>
             <thead>
             <tr>
@@ -43,6 +29,9 @@
                     <td><span th:text="${recipe.cookTime}"></span></td>
                 </td>
             </tr>
+        </table>
+        </fieldset>
+        <fieldset>
             <table>
                 <thead>
                 <tr>
@@ -55,12 +44,16 @@
 <!--                <tr>-->
 <!--                    <td th:each="ingredient : ${ingredients}">-->
 <!--                    <td><span th:text="${ingredient.quantity}"></span></td>-->
-
-
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td th:each="step : ${steps}">-->
+<!--                    <td><span th:text="${step.stepNumber}"></span></td>-->
 <!--                    </td>-->
 <!--                </tr>-->
             </tbody>
         </table>
+        </fieldset>
             <ul>
                 <li th:each="ingredient : ${ingredients}">
 
@@ -68,7 +61,15 @@
 
                 </li>
             </ul>
+        <ul>
+            <li th:each="step : ${steps}">
 
-            <button><a th:href="@{/recipe/delete/} + ${recipe.id}">Delete</a></button>
+                <p><span th:text="${step.stepNumber}"></span><span> </span><span th:text="${step.description}"></span></p>
+
+            </li>
+        </ul>
+            <form th:action="@{/recipe/delete/} + ${recipe.id}" method="POST" id="postform">
+                <input type="submit" name="delete" value="Delete recipe" />
+            </form>
     </body>
 </html>
