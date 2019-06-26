@@ -2,6 +2,11 @@ nav {
     background-color: lightblue !important;
 }
 
+.nav-wrapper {
+    padding-left: 20px;
+    text-transform: uppercase;
+}
+
 form, .page-title {
     margin: auto;
     text-align: center;
@@ -27,11 +32,37 @@ form, .page-title {
     text-transform: uppercase;
 }
 
+#profile {
+    margin-top: 0;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.row .col.m2 {
+    margin-left: 0;
+}
+
+.row .col.m2 p {
+    text-overflow: ellipsis;
+    white-space: initial;
+    overflow: hidden;
+}
+
+.card-title {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.card-content {
+    height: 100px;
+}
+
 .center {
     text-align: center;
 }
 
-.nav-wrapper {
-    padding-left: 20px;
-    text-transform: uppercase;
-}
