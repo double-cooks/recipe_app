@@ -17,6 +17,9 @@ import tgreenidge.com.recipe_app.recipes.repositories.RecipeRepository;
 import tgreenidge.com.recipe_app.recipes.repositories.StepRepository;
 
 import java.security.Principal;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class RecipeController {
@@ -72,6 +75,20 @@ public class RecipeController {
             m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
         }
         return "newingredients";
+    }
+
+    @GetMapping("/recipes/{id}")
+    public String getRecipe(@PathVariable Long id, Model m, Principal p) {
+        Recipe recipe = recipeRepository.findById(id).get();
+        List<Step> steps = recipe.getSteps().stream().sorted(Comparator.comparing(Step::getStepNumber)).collect(Collectors.toList());
+        m.addAttribute("recipe", recipe);
+        m.addAttribute("ingredients",recipe.getIngredients());
+        m.addAttribute("steps", steps);
+        if (p != null) {
+            m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
+        }
+
+        return "showRecipe";
     }
 
     //recipe _id
