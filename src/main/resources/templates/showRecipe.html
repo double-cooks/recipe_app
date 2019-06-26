@@ -25,8 +25,10 @@
         <li th:text="${step.description}"></li>
     </ul>
 
-    <button><a th:href="@{/recipes/edit/{id}(id=${recipe.id})}">Edit Recipe</a></button>
-    <button><a th:href="@{/recipe/delete/{id}(id=${recipe.id})}">Delete Recipe</a></button>
+    <button><a th:href="@{/recipes/edit2/{id}(id=${recipe.id})}">Edit Recipe</a></button>
+    <form th:action="@{/recipe/delete/} + ${recipe.id}" method="POST" id="postform">
+        <input type="submit" name="delete" value="Delete Recipe" />
+    </form>
     <button><a th:href="@{/profile}">My Profile</a></button>
 
 
