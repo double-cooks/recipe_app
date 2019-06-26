@@ -17,6 +17,9 @@ import tgreenidge.com.recipe_app.recipes.repositories.RecipeRepository;
 import tgreenidge.com.recipe_app.recipes.repositories.StepRepository;
 
 import java.security.Principal;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class RecipeController {
@@ -50,8 +53,21 @@ public class RecipeController {
         return new RedirectView("/recipes/" + newRecipe.getId() + "/ingredients/new");
     }
 
-    @GetMapping("/recipes/edit2/{id}")
+    @GetMapping("/recipes/{id}")
     public String getRecipeIngredients(@PathVariable Long id, Model m, Principal p) {
+        Recipe recipe = recipeRepository.findById(id).get();
+        m.addAttribute("recipe", recipe);
+        m.addAttribute("ingredients",recipe.getIngredients());
+        m.addAttribute("steps", recipe.getSteps());
+        if (p != null) {
+            m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
+        }
+
+        return "showRecipe";
+    }
+
+    @GetMapping("/recipes/edit2/{id}")
+    public String getEditRecipeIngredients(@PathVariable Long id, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
         m.addAttribute("recipe", recipe);
         m.addAttribute("ingredients",recipe.getIngredients());
@@ -80,13 +96,11 @@ public class RecipeController {
         Ingredient newIngredient = new Ingredient(name, quantity, recipe);
         ingredientRepository.save(newIngredient);
 
-        if(!isInitialCreation) {
+        if (!isInitialCreation) {
             return new RedirectView("/recipes/edit2/" + id);
         }
-        return new RedirectView("/recipes/" + id + "/ingredients/new");
-
+        return new RedirectView("/recipes/" + id + "/ingredients/new" + isInitialCreation);
     }
-
     //recipe _id
     @GetMapping("/confirmation/{id}")
     public String getConfirmationPage(@PathVariable Long id, Model m, Principal p) {

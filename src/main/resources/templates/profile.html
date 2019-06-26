@@ -28,7 +28,7 @@
                             <p>This dish has a prep time of <span th:text="${recipe.prepTime}"></span> minutes and a cook time of <span th:text="${recipe.cookTime}"></span> minutes.</p>
                         </div>
                         <div class="card-action">
-                            <a th:href="@{/recipes/edit2/{id}(id=${recipe.id})}">More Info</span></a>
+                            <a th:href="@{/recipes/{id}(id=${recipe.id})}">More Info</span></a>
                         </div>
                     </div>
                 </div>
