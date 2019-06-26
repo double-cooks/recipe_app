@@ -5,12 +5,12 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="/style.css" rel="stylesheet" />
-        <title>Confirmation</title>
+        <title>Review</title>
     </head>
     <body>
         <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
 
-        <h2>Recipe review</h2>
+        <h2 class="center">Recipe review</h2>
         <fieldset>
         <table>
             <thead>
@@ -31,6 +31,7 @@
             </tr>
         </table>
         </fieldset>
+
         <fieldset>
             <table>
                 <thead>
@@ -41,35 +42,39 @@
                 </thead>
                 <tbody>
 
-<!--                <tr>-->
-<!--                    <td th:each="ingredient : ${ingredients}">-->
-<!--                    <td><span th:text="${ingredient.quantity}"></span></td>-->
-<!--                    </td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td th:each="step : ${steps}">-->
-<!--                    <td><span th:text="${step.stepNumber}"></span></td>-->
-<!--                    </td>-->
-<!--                </tr>-->
+                <tr th:each="ingredient : ${ingredients}">
+                    <td><span th:text="${ingredient.quantity}"></span></td>
+                    <td><span th:text="${ingredient.name}"></span></td>
+                    </td>
+                </tr>
             </tbody>
         </table>
         </fieldset>
-            <ul>
-                <li th:each="ingredient : ${ingredients}">
 
-                    <p><span th:text="${ingredient.quantity}"></span><span> </span><span th:text="${ingredient.name}"></span></p>
+        <fieldset>
+            <table>
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Steps</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="step : ${steps}">
+                        <td>
+                        <td><span th:text="${step.stepNumber}"></span></td>
+                        <td><span th:text="${step.description}"></span></td>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
 
-                </li>
-            </ul>
-        <ul>
-            <li th:each="step : ${steps}">
+        <a th:href="@{/recipe/edit/} + ${recipe.id}"><button type="button">Edit Recipe</button></a>
 
-                <p><span th:text="${step.stepNumber}"></span><span> </span><span th:text="${step.description}"></span></p>
+        <form th:action="@{/recipe/delete/} + ${recipe.id}" method="POST" id="postform">
+            <input type="submit" name="delete" value="Delete recipe" />
+        </form>
 
-            </li>
-        </ul>
-            <form th:action="@{/recipe/delete/} + ${recipe.id}" method="POST" id="postform">
-                <input type="submit" name="delete" value="Delete recipe" />
-            </form>
     </body>
 </html>
