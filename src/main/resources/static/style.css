@@ -35,3 +35,26 @@ form, .page-title {
     padding-left: 20px;
     text-transform: uppercase;
 }
+
+.about-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+}
+
+.box-left {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    margin-left: 60px;
+ }
+
+ .box-right {
+     grid-column-start: 2;
+     grid-column-end: 5;
+     margin-right: 60px;
+  }
+
+  .about-img {
+     display: block;
+     margin: 0 auto;
+  }
