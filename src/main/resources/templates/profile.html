@@ -9,7 +9,7 @@
 </head>
 
     <body>
-        <nav th:replace="fragments/navbar :: nav"></nav>
+        <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
         <h1>My Profile</h1>
 
         <ul>
@@ -20,11 +20,19 @@
 
         <h2>My Recipes</h2>
 
-        <ul>
-            <li th:each="recipe : ${recipes}">
-                <a th:href="@{/recipes/{id}(id=${recipe.id})}"><span th:text="${recipe.title}"></span></a>
-            </li>
-        </ul>
+            <div class="row">
+                <div th:each="recipe : ${recipes}" class="col s12 m2">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title" th:text="${recipe.title}"></span>
+                            <p>This dish has a prep time of <span th:text="${recipe.prepTime}"></span> minutes and a cook time of <span th:text="${recipe.cookTime}"></span> minutes.</p>
+                        </div>
+                        <div class="card-action">
+                            <a th:href="@{/recipes/{id}(id=${recipe.id})}">More Info</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <button><a th:href="@{/recipes/create}">Add A Recipe</a></button>
 
     </body>
