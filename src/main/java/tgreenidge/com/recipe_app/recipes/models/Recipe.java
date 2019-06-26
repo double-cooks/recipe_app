@@ -18,7 +18,7 @@ public class Recipe {
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Ingredient> ingredients;
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe", cascade = {CascadeType.ALL})
     List<Step> steps;
 
     @ManyToOne
