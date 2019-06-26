@@ -66,6 +66,19 @@ form, .page-title {
     text-align: center;
 }
 
+#add-recipe-button {
+    border-radius: 7px;
+    padding: 15px;
+    margin-bottom: 30px;
+    background-color: lightblue;
+}
+
+#add-link {
+    font-size: 18px;
+    padding: 10px;
+    color: white;
+}
+
 .center {
     text-align: center;
 }
