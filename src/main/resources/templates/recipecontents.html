@@ -22,7 +22,7 @@
 
                 <button>
                     <a
-                            th:href="@{/recipes/{id}/ingredients/{id2}/update(id=${recipe.getId()},id2=${ingredient.getId()})}"
+                            th:href="@{/recipes/{id}/ingredients/{id2}/update/false(id=${recipe.getId()},id2=${ingredient.getId()})}"
                     >Edit
                     </a>
                 </button>
@@ -48,7 +48,7 @@
 
                 <button>
                     <a
-                            th:href="@{/recipes/{id}/steps/{id2}/update(id=${recipe.getId()},id2=${step.getId()})}"
+                            th:href="@{/recipes/{id}/steps/{id2}/update/false(id=${recipe.getId()},id2=${step.getId()})}"
                     >Edit
                     </a>
                 </button>
