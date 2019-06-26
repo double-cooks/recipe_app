@@ -5,12 +5,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="/style.css" rel="stylesheet" />
-    <title>Welcome!</title>
+    <title>Doubly | Digital Cookbook</title>
 </head>
 <body>
     <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
-    <h1 class="page-title">
-        Welcome to Doubly Cooked!!!!!
-    </h1>
+    <div id="hero-text">
+        <h1 class="page-title">Welcome to Doubly</h1>
+        <p>Please log in to view your profile and cookbook recipes</p>
+    </div>
 </body>
 </html>

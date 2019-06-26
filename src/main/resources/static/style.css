@@ -2,12 +2,27 @@ nav {
     background-color: lightblue !important;
 }
 
-form, .page-title {
+form {
     margin: auto;
     text-align: center;
     width: 40%;
 }
 
+#hero-text {
+    margin: 0 auto;
+    margin-top: 20%;
+    text-align: center;
+}
+
+#hero-text p {
+    font-size: 20px;
+}
+
 .center {
     text-align: center;
+}
+
+.nav-wrapper {
+    padding-left: 20px;
+    text-transform: uppercase;
 }
