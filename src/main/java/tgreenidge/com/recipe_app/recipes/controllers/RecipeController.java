@@ -86,13 +86,13 @@ public class RecipeController {
         return "confirmation";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/recipe/delete/{id}")
     public String getDelete(@PathVariable Long id, Model m) {
         recipeRepository.deleteById(id);
         return "confirmation";
     }
 
-    @PostMapping("/delete/{id}")
+    @PostMapping("/recipe/delete/{id}")
     public RedirectView getAfterDelete() {
         return new RedirectView("/profile");
     }
