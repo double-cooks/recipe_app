@@ -51,6 +51,7 @@ public class RecipeController {
         boolean isInitialCreation = true;
 
         recipeRepository.save(newRecipe);
+
         return new RedirectView("/recipes/" + newRecipe.getId() + "/ingredients/new/" + isInitialCreation);
     }
 

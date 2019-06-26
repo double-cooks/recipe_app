@@ -2,6 +2,11 @@ nav {
     background-color: lightblue !important;
 }
 
+.nav-wrapper {
+    padding-left: 20px;
+    text-transform: uppercase;
+}
+
 form, .page-title {
     margin: auto;
     text-align: center;
@@ -27,11 +32,105 @@ form, .page-title {
     text-transform: uppercase;
 }
 
+#profile {
+    margin-top: 50px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.row .col.m2 {
+    margin-left: 0;
+}
+
+.row .col.m2 p {
+    text-overflow: ellipsis;
+    white-space: initial;
+    overflow: hidden;
+}
+
+.card-title {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.card-content {
+    height: 160px;
+}
+
+#recipes {
+    text-align: center;
+}
+
+#add-recipe-button {
+    border-radius: 7px;
+    padding: 15px;
+    margin-bottom: 30px;
+    background-color: lightblue;
+}
+
+#add-link {
+    font-size: 18px;
+    padding: 10px;
+    color: white;
+}
+
 .center {
     text-align: center;
 }
 
-.nav-wrapper {
-    padding-left: 20px;
-    text-transform: uppercase;
+#profile-info {
+    margin-bottom: 50px;
 }
+
+#user-details {
+    display: flex;
+    justify-content: center;
+}
+
+#user-details img {
+    padding: 15px;
+}
+
+#user-details ul {
+    text-align: left;
+    padding: 15px;
+}
+
+.about-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+}
+
+.box-left {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    margin-left: 60px;
+ }
+
+ .box-right {
+     grid-column-start: 2;
+     grid-column-end: 5;
+     margin-right: 60px;
+  }
+
+  .about-img {
+     display: block;
+     margin: 0 auto;
+  }
+
+.error-title {
+    margin: auto;
+    text-align: center;
+    width: 40%;
+}
+
+.error-image {
+    margin-left: 35%
+}
+
