@@ -18,6 +18,12 @@
                 <span th:text="${ingredient.name}"></span>
                 <button>
                     <a
+                            th:href="@{/recipes/{id}/ingredients/new(id=${recipe.getId()})}"
+                    >Add
+                    </a>
+                </button>
+                <button>
+                    <a
                             th:href="@{/recipes/{id}/ingredients/{id2}/update(id=${recipe.getId()},id2=${ingredient.getId()})}"
                     >Edit
                     </a>
@@ -35,6 +41,12 @@
             <li>
                 <span th:text="${step.stepNumber}"></span>.
                 <span th:text="${step.description}"></span>
+                <button>
+                    <a
+                            th:href="@{/recipes/{id}/steps/new(id=${recipe.getId()})}"
+                    >Add
+                    </a>
+                </button>
                 <button>
                     <a
                             th:href="@{/recipes/{id}/steps/{id2}/update(id=${recipe.getId()},id2=${step.getId()})}"
