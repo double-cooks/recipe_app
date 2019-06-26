@@ -1,15 +1,19 @@
-# recipe_app
-> **Recipe Alexa Skill/Web App**
+# Doubly Cooked
 
 ## table of contents
 * [Documents](./documents)
+* [Summary](#Summary)
+* [Routes](#Routes)
+* [Notes](#Notes)
+* [Versions](#Versions)
+* [Creators](#Creators)
+
+## Summary
+
+Doubly Cooked is a recipe app developed for the casual home cook. It stores recipes in the cloud that can be accessed from the profile page after logging in. Recipes can be added, edited and deleted. User names must be unique and passwords are hashed.
 ***
 
-**[Summary](#Summary)**
-
-
-
-**Routes:**
+## Routes
 
 http://confirmation/id
 - Page to review a recipe, after it is added, with options to edit or delete the recipe
@@ -19,19 +23,19 @@ http://recipe/edit/id
 
 http://recipe/delete/id
 - Delete route to remove a recipe, its ingredients and steps
+
+http://recipe/aboutus
+- About Us page
 ***
 
-* [Notes](#Notes)
-* [Versions](#Versions)
-* [Creators](#Creators)
-
-## Purpose:
-
-
-## Summary
 
 ## Notes
 
 
 ## Creators
 
+- [Ed.Scott Abrahamsen](https://github.com/esa2)
+- [Matt Burger](https://github.com/)
+- [Paolo Chidrome](https://github.com/)
+- [Tisha Greenidge](https://github.com/)
+- [Jhia Turner](https://github.com/)

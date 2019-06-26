@@ -48,9 +48,11 @@ public class RecipeController {
     public RedirectView createRecipe(Principal p, String title, String prepTime, String cookTime) {
         AppUser user = appUserRepository.findByUsername(p.getName());
         Recipe newRecipe = new Recipe(title, prepTime, cookTime, user);
+        boolean isInitialCreation = true;
 
         recipeRepository.save(newRecipe);
-        return new RedirectView("/recipes/" + newRecipe.getId() + "/ingredients/new");
+
+        return new RedirectView("/recipes/" + newRecipe.getId() + "/ingredients/new/" + isInitialCreation);
     }
 
     @GetMapping("/recipes/{id}")
@@ -102,7 +104,7 @@ public class RecipeController {
         if (!isInitialCreation) {
             return new RedirectView("/recipes/edit2/" + id);
         }
-        return new RedirectView("/recipes/" + id + "/ingredients/new" + isInitialCreation);
+        return new RedirectView("/recipes/" + id + "/ingredients/new/" + isInitialCreation);
     }
     //recipe _id
     @GetMapping("/confirmation/{id}")
@@ -149,8 +151,8 @@ public class RecipeController {
         return new RedirectView("/recipes/" + id + "/steps/new/" + isInitialCreation);
     }
 
-    @GetMapping("/recipes/{id}/ingredients/{id2}/update")
-    public String getEditIngredientForm(@PathVariable Long id, @PathVariable Long id2, Model m, Principal p) {
+    @GetMapping("/recipes/{id}/ingredients/{id2}/update/{isInitialCreation}")
+    public String getEditIngredientForm(@PathVariable Long id, @PathVariable Long id2, @PathVariable boolean isInitialCreation, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
         Ingredient ingredientToUpdate = ingredientRepository.findById(id2).get();
         if (p != null) {
@@ -163,8 +165,8 @@ public class RecipeController {
 
     }
 
-    @PostMapping("/recipes/{id}/ingredients/{id2}/update")
-    public RedirectView editIngredient(@PathVariable Long id, @PathVariable Long id2, String name, String quantity, Model m) {
+    @PostMapping("/recipes/{id}/ingredients/{id2}/update/{isInitialCreation}")
+    public RedirectView editIngredient(@PathVariable Long id, @PathVariable Long id2, @PathVariable boolean isInitialCreation,String name, String quantity, Model m) {
         Recipe recipe = recipeRepository.findById(id).get();
         Ingredient ingredientToUpdate = ingredientRepository.findById(id2).get();
         boolean flag = false;
@@ -181,6 +183,10 @@ public class RecipeController {
             ingredientRepository.save(ingredientToUpdate);
         }
 
+        if(isInitialCreation) {
+            return new RedirectView("/recipes/" + id +"/ingredients/new/" + isInitialCreation);
+        }
+
         return new RedirectView("/recipes/edit2/" + id);
     }
 
@@ -194,8 +200,8 @@ public class RecipeController {
         return new RedirectView("/recipes/edit2/" + id);
     }
 
-    @GetMapping("/recipes/{id}/steps/{id2}/update")
-    public String getEditStepsForm(@PathVariable Long id, @PathVariable Long id2, Model m, Principal p) {
+    @GetMapping("/recipes/{id}/steps/{id2}/update/{isInitialCreation}")
+    public String getEditStepsForm(@PathVariable Long id, @PathVariable Long id2, @PathVariable boolean isInitialCreation, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
         Step stepToUpdate = stepRepository.findById(id2).get();
         if (p != null) {
@@ -209,8 +215,8 @@ public class RecipeController {
 
     }
 
-    @PostMapping("/recipes/{id}/steps/{id2}/update")
-    public RedirectView editStep(@PathVariable Long id, @PathVariable Long id2, int stepNumber, String description, Model m) {
+    @PostMapping("/recipes/{id}/steps/{id2}/update/{isInitialCreation}")
+    public RedirectView editStep(@PathVariable Long id, @PathVariable Long id2, @PathVariable boolean isInitialCreation, int stepNumber, String description, Model m) {
         Recipe recipe = recipeRepository.findById(id).get();
         Step stepToUpdate = stepRepository.findById(id2).get();
         boolean flag = false;
@@ -225,6 +231,10 @@ public class RecipeController {
 
         if(flag) {
             stepRepository.save(stepToUpdate);
+        }
+
+        if(isInitialCreation) {
+            return new RedirectView("/recipes/" + id +"/steps/new/" + isInitialCreation);
         }
 
         return new RedirectView("/recipes/edit2/" + id);
