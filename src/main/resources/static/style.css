@@ -123,3 +123,14 @@ form, .page-title {
      display: block;
      margin: 0 auto;
   }
+
+.error-title {
+    margin: auto;
+    text-align: center;
+    width: 40%;
+}
+
+.error-image {
+    margin-left: 35%
+}
+
