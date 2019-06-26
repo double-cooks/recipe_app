@@ -201,7 +201,7 @@ public class RecipeController {
     }
 
     @GetMapping("/recipes/{id}/steps/{id2}/update/{isInitialCreation}")
-    public String getEditStepsForm(@PathVariable Long id, @PathVariable Long id2, Model m, Principal p) {
+    public String getEditStepsForm(@PathVariable Long id, @PathVariable Long id2, @PathVariable boolean isInitialCreation, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
         Step stepToUpdate = stepRepository.findById(id2).get();
         if (p != null) {
