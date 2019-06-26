@@ -10,15 +10,20 @@
 
     <body>
         <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
-        <h1 class="page-title" id="profile">My Profile</h1>
 
-        <ul>
-            <li>Username: <span th:text="${user.username}"></span></li>
-            <li>First: <span th:text="${user.firstName}"></span></li>
-            <li>Last: <span th:text="${user.lastName}"></span></li>
-        </ul>
+        <section id="profile-info" class="center-align">
+            <h1 class="page-title" id="profile">My Profile</h1>
+            <div id="user-details">
+                <img src="/images/generic-user.jpg" height="150" width="150">
+                <ul>
+                    <li>Username: <span th:text="${user.username}"></span></li>
+                    <li>First Name: <span th:text="${user.firstName}"></span></li>
+                    <li>Last Name: <span th:text="${user.lastName}"></span></li>
+                </ul>
+            </div>
+        </section>
 
-        <h2>My Recipes</h2>
+        <h2 id="recipes">Recipes in Your Cookbook</h2>
 
             <div class="row">
                 <div th:each="recipe : ${recipes}" class="col s12 m2">
@@ -33,7 +38,9 @@
                     </div>
                 </div>
             </div>
-        <button><a th:href="@{/recipes/create}">Add A Recipe</a></button>
+        <div class="center-align">
+            <button><a id="add-link" th:href="@{/recipes/create}">Add A Recipe</a></button>
+        </div>
 
     </body>
 

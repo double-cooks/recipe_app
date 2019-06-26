@@ -33,7 +33,7 @@ form, .page-title {
 }
 
 #profile {
-    margin-top: 0;
+    margin-top: 50px;
 }
 
 .row {
@@ -59,10 +59,31 @@ form, .page-title {
 }
 
 .card-content {
-    height: 100px;
+    height: 160px;
+}
+
+#recipes {
+    text-align: center;
 }
 
 .center {
     text-align: center;
 }
 
+#profile-info {
+    margin-bottom: 50px;
+}
+
+#user-details {
+    display: flex;
+    justify-content: center;
+}
+
+#user-details img {
+    padding: 15px;
+}
+
+#user-details ul {
+    text-align: left;
+    padding: 15px;
+}
