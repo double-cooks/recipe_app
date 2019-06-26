@@ -50,7 +50,7 @@ public class RecipeController {
         return new RedirectView("/recipes/" + newRecipe.getId() + "/ingredients/new");
     }
 
-    @GetMapping("/recipes/{id}")
+    @GetMapping("/recipes/edit2/{id}")
     public String getRecipeIngredients(@PathVariable Long id, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
         m.addAttribute("recipe", recipe);

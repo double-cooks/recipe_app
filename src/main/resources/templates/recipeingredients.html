@@ -34,5 +34,6 @@
         <ul th:each="step : ${steps}">
             <li><span th:text="${step.stepNumber}"></span>. <span th:text="${step.description}"></span></li>
         </ul>
+        <a th:href="@{/recipe/edit/} + ${recipe.id}"><button type="button">Edit Recipe</button></a>
     </body>
 </html>
