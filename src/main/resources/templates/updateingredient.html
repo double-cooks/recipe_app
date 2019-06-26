@@ -13,7 +13,7 @@
 <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
 <h1 class="page-title">Update Ingredient</h1>
 
-<form th:action="@{/recipes/{id}/ingredients/{id2}/saveUpdate(id=${recipe.getId()}, id2=${ingredient.getId()})}" method="POST" id="postform">
+<form th:action="@{/recipes/{id}/ingredients/{id2}/update(id=${recipe.getId()}, id2=${ingredient.getId()})}" method="POST" id="postform">
     <fieldset>
         <table>
             <thead>

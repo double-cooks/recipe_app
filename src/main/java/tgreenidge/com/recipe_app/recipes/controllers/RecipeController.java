@@ -129,7 +129,7 @@ public class RecipeController {
 
     }
 
-    @PostMapping("/recipes/{id}/ingredients/{id2}/saveUpdate")
+    @PostMapping("/recipes/{id}/ingredients/{id2}/update")
     public RedirectView editIngredient(@PathVariable Long id, @PathVariable Long id2, String name, String quantity, Model m) {
         Recipe recipe = recipeRepository.findById(id).get();
         Ingredient ingredientToUpdate = ingredientRepository.findById(id2).get();
