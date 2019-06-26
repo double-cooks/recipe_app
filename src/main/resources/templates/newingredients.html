@@ -5,11 +5,12 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="/style.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/fontawesome.min.css">
         <title>Create Ingredient</title>
     </head>
 
     <body>
-        <nav th:replace="fragments/navbar :: nav"></nav>
+        <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
         <h1 class="page-title">Create Ingredient</h1>
 
         <form th:action="@{/recipes/{id}/ingredients/new(id=${id})}" method="POST" id="postform">
@@ -34,7 +35,9 @@
         </form>
         <h2>Ingredients</h2>
         <ul th:each="ingredient : ${ingredients}">
-            <li><span th:text="${ingredient.quantity}"></span> <span th:text="${ingredient.name}"></span></li>
+            <li><span th:text="${ingredient.quantity}"></span> <span th:text="${ingredient.name}"></span><span><i class="far fa-times-circle"></i></span>
+
+            </li>
         </ul>
     <button><a th:href="@{/recipes/{id}/steps/new(id=${id})}">Next: Add Steps</a></button>
     </body>

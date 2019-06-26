@@ -7,10 +7,7 @@
         <title>Logout Success!</title>
     </head>
     <body>
-        <nav th:replace="fragments/navbar :: nav"></nav>
+        <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
         <h1 class="page-title">Logout success!</h1>
-        <p>
-            <a href="/login">homepage</a>
-        </p>
     </body>
 </html>

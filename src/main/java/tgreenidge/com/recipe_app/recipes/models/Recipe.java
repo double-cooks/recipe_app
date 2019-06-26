@@ -15,7 +15,7 @@ public class Recipe {
     String prepTime;
     String cookTime;
 
-    @OneToMany(mappedBy = "recipe", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Ingredient> ingredients;
 
     @OneToMany(mappedBy = "recipe", cascade = {CascadeType.ALL})

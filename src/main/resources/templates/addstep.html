@@ -8,7 +8,7 @@
     <title>Add Steps</title>
 </head>
 <body>
-    <nav th:replace="fragments/navbar :: nav"></nav>
+    <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
     <h1 class="page-title">Add Step</h1>
 
     <form th:action="@{/recipes/{id}/steps/new(id=${id})}" method="POST" id="postform">
@@ -35,6 +35,6 @@
     <ul th:each="step : ${steps}">
         <li><span th:text="${step.stepNumber}"></span> <span th:text="${step.description}"></span></li>
     </ul>
-    <button><a href="#">Save & Review</a></button>
+    <button><a th:href="@{/confirmation/{id}(id=${recipe.getId()})}">Save & Review</a></button>
 </body>
 </html>

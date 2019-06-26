@@ -10,7 +10,7 @@
 </head>
 
     <body>
-        <nav th:replace="fragments/navbar :: nav"></nav>
+        <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
         <h1 class="page-title">Log in</h1>
 
         <form action="/login" method="POST">

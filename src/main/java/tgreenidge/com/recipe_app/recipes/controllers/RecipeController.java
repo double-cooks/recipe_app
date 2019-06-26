@@ -35,6 +35,9 @@ public class RecipeController {
 
     @GetMapping("/recipes/create")
     public String getRecipeForm(Principal p, Model m) {
+        if (p != null) {
+            m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
+        }
         return "newrecipe";
     }
 
@@ -48,29 +51,38 @@ public class RecipeController {
     }
 
     @GetMapping("/recipes/{id}")
-    public String getRecipeIngredients(@PathVariable Long id, Model m) {
+    public String getRecipeIngredients(@PathVariable Long id, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
         m.addAttribute("recipe", recipe);
         m.addAttribute("ingredients",recipe.getIngredients());
         m.addAttribute("steps", recipe.getSteps());
+        if (p != null) {
+            m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
+        }
 
         return "recipeingredients";
     }
 
-
     @GetMapping("/recipes/{id}/ingredients/new")
-    public String getNewIngredients(@PathVariable Long id, Model m) {
+    public String getNewIngredients(@PathVariable Long id, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
         m.addAttribute("recipe", recipe);
         m.addAttribute("ingredients", recipe.getIngredients());
+        if (p != null) {
+            m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
+        }
         return "newingredients";
     }
 
+    //recipe _id
     @GetMapping("/confirmation/{id}")
-    public String getConfirmationPage(@PathVariable Long id, Model m) {
+    public String getConfirmationPage(@PathVariable Long id, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
         m.addAttribute("recipe", recipe);
         m.addAttribute("ingredients", recipe.getIngredients());
+        if (p != null) {
+            m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
+        }
         return "confirmation";
     }
 
@@ -96,10 +108,13 @@ public class RecipeController {
     }
 
     @GetMapping("/recipes/{id}/steps/new")
-    public String getNewStepForm(@PathVariable Long id, Model m) {
+    public String getNewStepForm(@PathVariable Long id, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
         m.addAttribute("recipe", recipe);
         m.addAttribute("steps", recipe.getSteps());
+        if (p != null) {
+            m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
+        }
         return "addstep";
 
     }
@@ -112,4 +127,48 @@ public class RecipeController {
 
         return new RedirectView("/recipes/" + id + "/steps/new");
     }
+
+    @GetMapping("/recipes/{id}/ingredients/{id2}/update")
+    public String getEditIngredientForm(@PathVariable Long id, @PathVariable Long id2, Model m) {
+        Recipe recipe = recipeRepository.findById(id).get();
+        Ingredient ingredientToUpdate = ingredientRepository.findById(id2).get();
+
+        m.addAttribute("recipe", recipe);
+        m.addAttribute("ingredient", ingredientToUpdate);
+
+        return "updateingredient";
+
+    }
+
+    @PostMapping("/recipes/{id}/ingredients/{id2}/update")
+    public RedirectView editIngredient(@PathVariable Long id, @PathVariable Long id2, String name, String quantity, Model m) {
+        Recipe recipe = recipeRepository.findById(id).get();
+        Ingredient ingredientToUpdate = ingredientRepository.findById(id2).get();
+        boolean flag = false;
+        if(!ingredientToUpdate.getName().equals(name)) {
+            ingredientToUpdate.setName(name);
+            flag = true;
+        }
+        if(!ingredientToUpdate.getQuantity().equals(quantity)) {
+            ingredientToUpdate.setQuantity(quantity);
+            flag = true;
+        }
+
+        if(flag) {
+            ingredientRepository.save(ingredientToUpdate);
+        }
+
+        return new RedirectView("/recipes/" + id);
+    }
+
+    @PostMapping("/recipes/{id}/ingredients/{id2}/delete")
+    public RedirectView deleteIngredient(@PathVariable Long id, @PathVariable Long id2, Model m) {
+        Recipe recipe = recipeRepository.findById(id).get();
+        Ingredient ingredientToDelete = ingredientRepository.findById(id2).get();
+
+        ingredientRepository.delete(ingredientToDelete);
+
+        return new RedirectView("/recipes/" + id);
+    }
+
 }
