@@ -15,10 +15,10 @@ public class Recipe {
     String prepTime;
     String cookTime;
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe", cascade = {CascadeType.ALL})
     List<Ingredient> ingredients;
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe", cascade = {CascadeType.ALL})
     List<Step> steps;
 
     @ManyToOne

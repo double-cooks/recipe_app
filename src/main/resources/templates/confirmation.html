@@ -9,21 +9,65 @@
     </head>
     <body>
         <nav th:replace="fragments/navbar :: nav"></nav>
-        <h1>Confirmation</h1>
 
-        <h2>Recipe</h2>
+        <h2>Recipe review</h2>
         <ul>
-            <li th:each="recipe : ${recipe}">
-                <p>Recipe <span th:text="${recipe.title}"></span></p>
-                <p>Prep time <span th:text="${recipe.prepTime}"></span></p>
-                <p>Cook time <span th:text="${recipe.cookTime}"></span></p>
-            </li>
+<!--            <li th:each="recipe : ${recipe}">-->
+<!--                <p>Recipe <span th:text="${recipe.title}"></span></p>-->
+<!--                <p>Prep time <span th:text="${recipe.prepTime}"></span></p>-->
+<!--                <p>Cook time <span th:text="${recipe.cookTime}"></span></p>-->
+<!--            </li>-->
         </ul>
         <ul>
-            <li th:each="ingredient : ${ingredients}">
-                <p>Ingredient <span th:text="${ingredient.name}"></span></p>
-                <p>Quantity <span th:text="${ingredient.quantity}"></span></p>
+<!--            <li th:each="ingredient : ${ingredients}">-->
+
+<!--                <p><span th:text="${ingredient.quantity}"></span><span> </span><span th:text="${ingredient.name}"></span></p>-->
+
             </li>
         </ul>
+        <table>
+            <thead>
+            <tr>
+                <th></th>
+                <th>Recipe Title</th>
+                <th>Prep Time</th>
+                <th>Cook Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:each="recipe : ${recipe}">
+                    <td><span th:text="${recipe.title}"></span></td>
+                    <td><span th:text="${recipe.prepTime}"></span></td>
+                    <td><span th:text="${recipe.cookTime}"></span></td>
+                </td>
+            </tr>
+            <table>
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Ingredients</th>
+                </tr>
+                </thead>
+                <tbody>
+
+<!--                <tr>-->
+<!--                    <td th:each="ingredient : ${ingredients}">-->
+<!--                    <td><span th:text="${ingredient.quantity}"></span></td>-->
+
+
+<!--                    </td>-->
+<!--                </tr>-->
+            </tbody>
+        </table>
+            <ul>
+                <li th:each="ingredient : ${ingredients}">
+
+                    <p><span th:text="${ingredient.quantity}"></span><span> </span><span th:text="${ingredient.name}"></span></p>
+
+                </li>
+            </ul>
+
+            <button><a th:href="@{/delete/} + ${recipe.id}">Delete</a></button>
     </body>
 </html>

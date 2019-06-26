@@ -74,6 +74,17 @@ public class RecipeController {
         return "confirmation";
     }
 
+    @GetMapping("/delete/{id}")
+    public String getDelete(@PathVariable Long id, Model m) {
+        recipeRepository.deleteById(id);
+        return "confirmation";
+    }
+
+    @PostMapping("/delete/{id}")
+    public RedirectView getAfterDelete() {
+        return new RedirectView("/profile");
+    }
+
     @PostMapping("/recipes/{id}/ingredients/new")
     public RedirectView createNewIngredient(@PathVariable Long id, String name, String quantity) {
         Recipe recipe = recipeRepository.findById(id).get();
