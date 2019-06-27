@@ -20,12 +20,13 @@ form, .page-title {
 .page-title {
     margin-top: 15%;
     padding-bottom: 20px;
+    font-size: 4em;
 }
 
 #hero-text {
     margin: 0 auto;
-    margin-top: 20%;
     text-align: center;
+    color: #E6D5B4;
 }
 
 #hero-text p {
@@ -147,6 +148,12 @@ a {
      display: block;
      margin: 0 auto;
   }
+
+  .logo-img {
+       display: block;
+       margin: 0 auto;
+       margin-top: 10px;
+    }
 
 .error-title {
     margin: auto;

@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import tgreenidge.com.recipe_app.recipes.models.UserDetailsServiceImpl;
@@ -39,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
 
                 .antMatchers(HttpMethod.GET,  "/", "/alexa/**").permitAll()
-                .antMatchers("/login", "/signup", "/*.css", "/logoutSuccess").permitAll()
+                .antMatchers("/login", "/signup", "/*.css", "/logo.png", "/logoutSuccess").permitAll()
 
                 .anyRequest().authenticated()
 
