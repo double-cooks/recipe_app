@@ -40,10 +40,17 @@ Tomcat started on port(s): 5000 (http) with context path ''
 Started RecipesApplication in 12.343 seconds (JVM running for 12.804)
 ```
 
-At localhost:5000 you will find the app splash page
+At localhost:5000 you will find the app splash page. Navigate to sign up.
 
+![alt-text-1](assets/splash.png)
 
+At sign up enter your first name, last name, a user name and a password. This will automagically take you to your profile page.
 
+![alt-text-1](assets/signup.png)
+
+As a new user you won't have any recipes yet but will be able to add recipes from here or using the nav bar from anywhere in the app after logging in
+
+![alt-text-1](assets/profile.png)
 ***
 
 ## Routes
