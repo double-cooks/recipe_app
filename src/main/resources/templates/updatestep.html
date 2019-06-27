@@ -23,9 +23,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td><input  type="text" name="stepNumber"/></td>
-                <td><input  type="text" name="description"/></td>
+            <tr th:each="step : ${step}">
+                <td><input th:value="${step.stepNumber}" type="text" name="stepNumber"/></td>
+                <td><input th:value="${step.description}" type="text" name="description"/></td>
             </tr>
             </tbody>
         </table>
