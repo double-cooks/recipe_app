@@ -9,10 +9,11 @@
 </head>
     <body>
         <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
-        <img class="logo-img" src="/logo.png">
+
         <div id="hero-text">
             <span class="page-title">Welcome <span th:if=${user} th:text="${user.username}"></span></span>
             <p th:unless="${user}">Please log in to view your profile and cookbook recipes</p>
         </div>
+        <img class="logo-img" src="/logo.png">
     </body>
 </html>
