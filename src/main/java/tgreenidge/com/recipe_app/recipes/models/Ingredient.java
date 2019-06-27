@@ -13,7 +13,7 @@ public class Ingredient {
     String name;
     String quantity;
 
-    @JsonBackReference
+    @JsonBackReference // necessary for JSON response for RestController for Alexa
     @ManyToOne
     Recipe recipe;
 

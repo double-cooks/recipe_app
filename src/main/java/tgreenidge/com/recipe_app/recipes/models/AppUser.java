@@ -21,7 +21,7 @@ public class AppUser implements UserDetails {
     String firstname;
     String lastname;
 
-    @JsonManagedReference
+    @JsonManagedReference // necessary for JSON response for RestController for Alexa
     @OneToMany(mappedBy = "appUser")
     public List<Recipe> recipes;
 

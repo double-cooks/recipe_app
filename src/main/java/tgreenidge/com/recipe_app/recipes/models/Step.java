@@ -11,7 +11,7 @@ public class Step {
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
 
-    @JsonBackReference
+    @JsonBackReference // necessary for JSON response for RestController for Alexa
     @ManyToOne
     Recipe recipe;
 

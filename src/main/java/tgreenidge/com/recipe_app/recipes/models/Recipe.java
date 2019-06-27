@@ -22,15 +22,15 @@ public class Recipe {
     String prepTime;
     String cookTime;
 
-    @JsonManagedReference
+    @JsonManagedReference // necessary for JSON response for RestController for Alexa
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Ingredient> ingredients;
 
-    @JsonManagedReference
+    @JsonManagedReference // necessary for JSON response for RestController for Alexa
     @OneToMany(mappedBy = "recipe", cascade = {CascadeType.ALL})
     List<Step> steps;
 
-    @JsonBackReference
+    @JsonBackReference // necessary for JSON response for RestController for Alexa
     @ManyToOne
     AppUser appUser;
 
