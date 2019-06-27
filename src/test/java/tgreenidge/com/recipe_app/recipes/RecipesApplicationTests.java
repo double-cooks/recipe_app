@@ -17,6 +17,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -134,14 +135,16 @@ public class RecipesApplicationTests {
 	}
 
 	@Test
-	public void givenGreetURIWithPostAndFormData_whenMockMVC_thenResponseOK() {
-		this.mockMvc.perform(post("/greetWithPostAndFormData").param("id", "1")
-				.param("name", "John Doe")).andDo(print()).andExpect(status().isOk())
+	@WithMockUser(username = "greg", password = "password", roles = "USER")
+	public void recipesCreateTest() throws Exception {
+		mockMvc.perform(post("/recipes/create")
+				.param("title", "Cement")
+				.param("prepTime", "1 hour")
+				.param("cookTime", "2 hours")).andDo(print()).andExpect(status().is3xxRedirection());
 
-				.andExpect(content().contentType("application/json;charset=UTF-8"))
-				.andExpect(jsonPath("$.message").value("Hello World John Doe!!!"))
-				.andExpect(jsonPath("$.id").value(1));
 	}
+
+
 
 
 }
