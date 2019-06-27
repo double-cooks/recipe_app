@@ -40,17 +40,41 @@ Tomcat started on port(s): 5000 (http) with context path ''
 Started RecipesApplication in 12.343 seconds (JVM running for 12.804)
 ```
 
-At localhost:5000 you will find the app splash page. Navigate to sign up.
+At localhost:5000 the user will find the app splash page. Navigate to sign up.
 
 ![alt-text-1](assets/splash.png)
 
-At sign up enter your first name, last name, a user name and a password. This will automagically take you to your profile page.
+At sign up enter first name, last name, a user name and a password. This will automagically take you to your profile page.
 
 ![alt-text-1](assets/signup.png)
 
-As a new user you won't have any recipes yet but will be able to add recipes from here or using the nav bar from anywhere in the app after logging in
+A new user won't have any recipes yet but will be able to add recipes from here or using the nav bar from anywhere in the app after logging in.
 
 ![alt-text-1](assets/profile.png)
+
+Adding a recipe has three steps. Step one is to give the recipe a name, a prep time, and a cook time then click submit.
+
+![alt-text-1](assets/add.png)
+
+The second step is to add ingredients. Each ingredient should have a name and quantity.
+
+![alt-text-1](assets/ingredient.png)
+
+The third step is to add cooking steps. Start at step 1 and add instructions for each step.
+
+![alt-text-1](assets/step.png)
+
+When all ingredients and steps are added and Save-and-Review is clicked the review page will display the recipe. Here the user can edit or delete the recipe. Let's edit.
+
+![alt-text-1](assets/review.png)
+
+From the edit page ingredients and steps can be changed or deleted. Clicking Edit will bring up the edit form.
+
+![alt-text-1](assets/edit.png)
+
+The edit form will have the item to be edited displayed. Modify as needed and click Submit. This will bring the user back to the edit page to confirm the change.
+
+![alt-text-1](assets/update.png)
 ***
 
 ## Routes
