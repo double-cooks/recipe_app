@@ -7,11 +7,12 @@
     <link href="/style.css" rel="stylesheet" />
     <title>Doubly | Digital Cookbook</title>
 </head>
-<body>
-    <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
-    <div id="hero-text">
-        <h1 class="page-title">Welcome to Doubly</h1>
-        <p>Please log in to view your profile and cookbook recipes</p>
-    </div>
-</body>
+    <body>
+        <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
+        <img class="logo-img" src="/logo.png">
+        <div id="hero-text">
+            <span class="page-title">Welcome <span th:if=${user} th:text="${user.username}"></span></span>
+            <p th:unless="${user}">Please log in to view your profile and cookbook recipes</p>
+        </div>
+    </body>
 </html>
