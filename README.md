@@ -3,14 +3,47 @@
 ## table of contents
 * [Documents](./documents)
 * [Summary](#Summary)
+* [Installation](#Installation)
 * [Routes](#Routes)
 * [Notes](#Notes)
 * [Versions](#Versions)
+* [Tests](#Tests)
 * [Creators](#Creators)
 
 ## Summary
 
 Doubly Cooked is a recipe app developed for the casual home cook. It stores recipes in the cloud that can be accessed from the profile page after logging in. Recipes can be added, edited and deleted. User names must be unique and passwords are hashed.
+***
+
+## Installation
+To get this application up and running on your local machine, fork and/or clone this repository using the git clone command in your terminal.
+
+Use PSQL to create a postgres database: CREATE DATABASE dbname
+
+Add environment variables:
+- DATABASE_URL
+
+If required by your OS:
+- DATABASE_USERNAME
+- DATABASE_PASSWORD
+
+Run RecipesApplication wich contains the main method. If the application successfully starts you will see these messages:
+```
+HHH000270: Type registration [java.util.UUID] overrides previous : 
+Initialized JPA EntityManagerFactory for persistence unit 'default'
+LiveReload server is running on port
+Creating filter chain:
+Initializing ExecutorService 'applicationTaskExecutor'
+spring.jpa.open-in-view is enabled by default.
+Adding welcome page template: index
+Tomcat started on port(s): 5000 (http) with context path ''
+Started RecipesApplication in 12.343 seconds (JVM running for 12.804)
+```
+
+At localhost:5000 you will find the app splash page
+
+
+
 ***
 
 ## Routes
@@ -47,6 +80,8 @@ http://recipe/aboutus
 ```@JsonManagedReference``` and ```@JsonBackReference``` annotations were used to obtain JSON repsonses. This [stack overflow](https://stackoverflow.com/questions/47693110/could-not-write-json-infinite-recursion-stackoverflowerror-nested-exception) post was used
 for setting up respective associations in the model
 
+## Tests
+[See the tests](src/test/java/tgreenidge/com/recipe_app/recipes/RecipesApplicationTests.java)
 
 ## Creators
 
