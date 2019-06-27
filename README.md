@@ -30,6 +30,10 @@ http://recipe/aboutus
 
 
 ## Notes
+### Alexa controller for recipe and Json response
+```@JsonManagedReference``` and ```@JsonBackReference``` annotations were used to obtain JSON repsonses. This [stack overflow](https://stackoverflow.com/questions/47693110/could-not-write-json-infinite-recursion-stackoverflowerror-nested-exception) post was used
+for setting up respective associations in the model
+
 
 
 ## Creators
