@@ -47,7 +47,7 @@ public class AlexaController {
     }
 
     /*
-        Returns the cooktime that are created in the app
+        Returns the cook time for a recipe with a specific title
      */
     @RequestMapping(value = "/alexa/recipes/{title}/cooktime", method = RequestMethod.GET)
     public @ResponseBody String getAlexaRecipeCookTimeByTitle(@PathVariable String title) {
@@ -58,7 +58,7 @@ public class AlexaController {
     }
 
     /*
-        Returns the preptime that are created in the app
+        Returns the prep time for a recipe with a specific title
      */
     @RequestMapping(value = "/alexa/recipes/{title}/preptime", method = RequestMethod.GET)
     public @ResponseBody String getAlexaRecipePrepTimeByTitle(@PathVariable String title) {
@@ -69,7 +69,7 @@ public class AlexaController {
     }
 
     /*
-        Returns the ingredients for a given recipe by ingredient in JSON format
+        Returns the ingredients for a given recipe by title in JSON format
      */
     @RequestMapping(value = "/alexa/recipes/{title}/ingredients", produces = "application/json", method = RequestMethod.GET)
     public @ResponseBody ResponseEntity<List<Ingredient>> getAlexaRecipeIngredients(@PathVariable String title) {
@@ -79,7 +79,7 @@ public class AlexaController {
     }
 
     /*
-        Returns the steps for a given recipe by ingredient in JSON format
+        Returns the steps for a given recipe by by title in JSON format
      */
     @RequestMapping(value = "/alexa/recipes/{title}/steps", produces = "application/json", method = RequestMethod.GET)
     public @ResponseBody ResponseEntity<List<Step>> getAlexaRecipeSteps(@PathVariable String title) {
