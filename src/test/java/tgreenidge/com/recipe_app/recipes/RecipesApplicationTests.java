@@ -8,19 +8,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import tgreenidge.com.recipe_app.recipes.controllers.AlexaController;
 import tgreenidge.com.recipe_app.recipes.controllers.AppUserController;
 import tgreenidge.com.recipe_app.recipes.controllers.RecipeController;
 import tgreenidge.com.recipe_app.recipes.models.AppUser;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -31,6 +32,9 @@ public class RecipesApplicationTests {
 	AppUserController appUserControllerTest;
 	@Autowired
 	RecipeController recipeControllerTest;
+
+	@Autowired
+    AlexaController alexaController;
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -135,7 +139,7 @@ public class RecipesApplicationTests {
 	}
 
 	@Test
-	@WithMockUser(username = "greg", password = "password", roles = "USER")
+	@WithMockUser(username = "dd", password = "dd", roles = "USER")
 	public void recipesCreateTest() throws Exception {
 		mockMvc.perform(post("/recipes/create")
 				.param("title", "Cement")
@@ -144,7 +148,34 @@ public class RecipesApplicationTests {
 
 	}
 
+	// alexa controller
+    @Test
+    public void testAlexaControllerIsAutowired() {
+	    assertNotNull(alexaController);
+    }
 
+    @Test
+    public void alexaRecipesViewJsonTest() throws Exception {
+        this.mockMvc.perform(get("/alexa/recipes"))
+                .andDo(print()).andExpect(status().isOk());
+    }
 
+    @Test
+    public void alexaRecipesTestIsJsonOutput() throws Exception {
+        this.mockMvc.perform(get("/alexa/recipes"))
+                .andDo(print()).andExpect(content().contentType("application/json;charset=UTF-8"));
+    }
+
+    @Test
+    public void alexaRouteTestStep() throws Exception {
+	    this.mockMvc.perform(get("/alexa/recipes/test/steps"))
+                .andExpect(jsonPath("$.title", is("test")));
+    }
+
+    @Test
+    public void alexaRouteTestIngredient() throws Exception {
+        this.mockMvc.perform(get("/alexa/recipes/test/steps"))
+                .andExpect(jsonPath("$.name", is("ingredient1")));
+    }
 
 }
