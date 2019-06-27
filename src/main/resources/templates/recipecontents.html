@@ -9,64 +9,61 @@
     </head>
     <body>
         <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
-        <h1 class="page-title"><span th:text="${recipe.title}"></span> Recipe</h1>
+        <h1 class="page-title" id="edit-recipe-title"><span th:text="${recipe.title}"></span> Recipe</h1>
+        <div class="time-info">
+            <p><strong>Prep time: </strong><span th:text="${recipe.getPrepTime()}"></span></p>
+            <p><strong>Cook time: </strong><span th:text="${recipe.getCookTime()}"></span></p>
+        </div>
+        <div class="center-align">
+            <h4>Ingredients</h4>
+            <ul>
+                <li th:each="ingredient : ${ingredients}" class="edit-list">
+                    <span th:text="${ingredient.quantity}"></span>
+                    <span th:text="${ingredient.name}"></span>
 
-        <p><strong>Prep time: </strong><span th:text="${recipe.getPrepTime()}"></span></p>
-        <p><strong>Cook time: </strong><span th:text="${recipe.getCookTime()}"></span></p>
-        
-        <h4>Ingredients</h4>
-        <ul>
-            <li th:each="ingredient : ${ingredients}">
-                <span th:text="${ingredient.quantity}"></span>
-                <span th:text="${ingredient.name}"></span>
-
-                <button>
-                    <a
-                            th:href="@{/recipes/{id}/ingredients/{id2}/update/false(id=${recipe.getId()},id2=${ingredient.getId()})}"
-                    >Edit
-                    </a>
-                </button>
-
-                <form method="POST">
-                    <button th:formaction="@{/recipes/{id}/ingredients/{id2}/delete(id=${recipe.getId()},id2=${ingredient.getId()})}">
-                        Delete
+                    <button>
+                        <a
+                                th:href="@{/recipes/{id}/ingredients/{id2}/update/false(id=${recipe.getId()},id2=${ingredient.getId()})}"
+                        >Edit
+                        </a>
                     </button>
-                </form>
-            </li>
-        </ul>
-        <button>
-            <a
-                    th:href="@{/recipes/{id}/ingredients/new/false(id=${recipe.getId()})}"
-            >Add Ingredient
-            </a>
-        </button>
-        <h4>Steps</h4>
-        <ul th:each="step : ${steps}">
-            <li>
-                <span th:text="${step.stepNumber}"></span>.
-                <span th:text="${step.description}"></span>
 
-                <button>
-                    <a
-                            th:href="@{/recipes/{id}/steps/{id2}/update/false(id=${recipe.getId()},id2=${step.getId()})}"
-                    >Edit
-                    </a>
-                </button>
+                    <form method="POST">
+                        <button th:formaction="@{/recipes/{id}/ingredients/{id2}/delete(id=${recipe.getId()},id2=${ingredient.getId()})}" class="edit-delete">
+                            Delete
+                        </button>
+                    </form>
+                </li>
+            </ul>
+            <button class="add">
+                <a th:href="@{/recipes/{id}/ingredients/new/false(id=${recipe.getId()})}">Add Ingredient</a>
+            </button>
+        </div>
 
-                <form method="POST">
-                    <button th:formaction="@{/recipes/{id}/steps/{id2}/delete(id=${recipe.getId()},id2=${step.getId()})}">
-                        Delete
+        <div class="center-align">
+            <h4>Steps</h4>
+            <ul th:each="step : ${steps}">
+                <li class="edit-list">
+                    <span th:text="${step.stepNumber}"></span>.
+                    <span th:text="${step.description}"></span>
+
+                    <button>
+                        <a th:href="@{/recipes/{id}/steps/{id2}/update/false(id=${recipe.getId()},id2=${step.getId()})}">Edit</a>
                     </button>
-                </form>
-            </li>
-        </ul>
-        <button>
-            <a
-                    th:href="@{/recipes/{id}/steps/new/false(id=${recipe.getId()})}"
-            >Add Step
-            </a>
-        </button>
 
-        <a th:href="@{/recipes/{id}(id=${recipe.getId()})}"><button type="button">Done</button></a>
+                    <form method="POST">
+                        <button th:formaction="@{/recipes/{id}/steps/{id2}/delete(id=${recipe.getId()},id2=${step.getId()})}" class="edit-delete">
+                            Delete
+                        </button>
+                    </form>
+                </li>
+            </ul>
+            <button class="add">
+                <a th:href="@{/recipes/{id}/steps/new/false(id=${recipe.getId()})}">Add Step</a>
+            </button>
+        </div>
+        <div class="center-align">
+            <a th:href="@{/recipes/{id}(id=${recipe.getId()})}"><button type="button" class="done">Done</button></a>
+        </div>
     </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -11,23 +11,35 @@
         <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
 
         <section id="recipe">
+
             <h1 class="page-title" id="recipe-title" th:text="${recipe.title}"></h1>
-            <p><strong>Prep time: </strong><span th:text="${recipe.getPrepTime()}"></span></p>
-            <p><strong>Cook time: </strong><span th:text="${recipe.getCookTime()}"></span></p>
 
-            <h3>Ingredients</h3>
+            <div class="time-info">
+                <p><strong>Prep time: </strong><span th:text="${recipe.getPrepTime()}"></span></p>
+                <p><strong>Cook time: </strong><span th:text="${recipe.getCookTime()}"></span></p>
+            </div>
+            <div class="center-align" id="ingredients-and-steps">
+                <div class="ingredients">
+                    <h3>Ingredients</h3>
 
-            <ul th:each="ingredient: ${ingredients}">
-                <li><span th:text="${ingredient.quantity} "></span> <span></span><span th:text="${ingredient.name}"></span></li>
-            </ul>
+                    <ul th:each="ingredient: ${ingredients}">
+                        <li><span th:text="${ingredient.quantity} "></span> <span></span><span th:text="${ingredient.name}"></span></li>
+                    </ul>
+                </div>
 
-            <h3>Steps</h3>
-            <ul th:each="step: ${steps}">
-                <li th:text="${step.description}"></li>
-            </ul>
-            <button><a th:href="@{/recipes/edit2/{id}(id=${recipe.id})}">Edit Recipe</a></button>
-            <button><a th:href="@{/profile}">My Profile</a></button>
-            <form th:action="@{/recipe/delete/} + ${recipe.id}" method="POST" id="postform">
+                <div class="steps">
+                    <h3>Steps</h3>
+                    <ul th:each="step: ${steps}">
+                        <li th:text="${step.description}"></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="center-align">
+                <button><a th:href="@{/recipes/edit2/{id}(id=${recipe.id})}">Edit Recipe</a></button>
+                <button><a th:href="@{/profile}">My Profile</a></button>
+            </div>
+            <form th:action="@{/recipe/delete/} + ${recipe.id}" method="POST" id="postform" class="center-align">
                 <input type="submit" name="delete" value="Delete Recipe" />
             </form>
         </section>

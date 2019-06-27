@@ -12,7 +12,7 @@
         <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
         <h1 class="page-title">Sign up</h1>
 
-        <form action="/signup" method="POST">
+        <form action="/signup" method="POST" id="sign-up">
 
             <label for="firstName">First Name: </label>
             <input name="firstName" id="firstName"/>

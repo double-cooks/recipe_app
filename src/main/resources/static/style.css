@@ -1,5 +1,25 @@
-#recipe {
-    text-align: center;
+.time-info {
+    display: flex;
+    justify-content: center;
+}
+
+.time-info p {
+    margin: 10px;
+}
+
+.edit-list {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.edit-list * {
+    margin: 10px;
+    height: 50px;
+}
+
+.edit-list p, .edit-list span, #ingredients-and-steps {
+    font-size: 25px;
 }
 
 nav {
@@ -11,7 +31,7 @@ nav {
     text-transform: uppercase;
 }
 
-form, .page-title {
+#sign-up, #log-in, .page-title, .add-recipe-form {
     margin: auto;
     text-align: center;
     width: 40%;
@@ -20,6 +40,10 @@ form, .page-title {
 .page-title {
     margin-top: 15%;
     padding-bottom: 20px;
+}
+
+#new-ingredient, #new-step {
+    margin-top: 5%;
 }
 
 #hero-text {
@@ -85,8 +109,17 @@ button, [type="submit"] {
     color: white;
 }
 
-[name="delete"] {
+[name="delete"], .edit-delete {
     background-color: red;
+}
+
+.add {
+    background-color: #82898c;
+}
+
+.done {
+    background-color: green;
+    width: 200px;
 }
 
 #add-link {
@@ -121,8 +154,9 @@ a {
     padding: 15px;
 }
 
-#recipe-title {
+#recipe-title, #edit-recipe-title {
     margin-top: 5%;
+    text-transform: capitalize;
 }
 
 .about-wrapper {
