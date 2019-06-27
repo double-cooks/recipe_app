@@ -11,6 +11,7 @@ import tgreenidge.com.recipe_app.recipes.repositories.AppUserRepository;
 import tgreenidge.com.recipe_app.recipes.repositories.RecipeRepository;
 
 import java.security.Principal;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,13 +37,11 @@ public class AlexaController {
     }
 
     /*
-        Returns the first recipe that is created in the app with a given title
+        Returns the recipes that is created in the app with a given title
      */
     @RequestMapping(value = "/alexa/recipes/{title}", method = RequestMethod.GET)
     public @ResponseBody ResponseEntity<List<Recipe>> getAlexaRecipesByTitle(@PathVariable String title) {
         List<Recipe> recipes = recipeRepository.findByTitle(title.toLowerCase());
-        //get the first recipe with that title
-        Recipe recipe = recipes.get(0);
         return new ResponseEntity<List<Recipe>>(recipes, HttpStatus.OK);
     }
 
@@ -53,8 +52,7 @@ public class AlexaController {
     public @ResponseBody String getAlexaRecipeCookTimeByTitle(@PathVariable String title) {
         List<Recipe> recipes = recipeRepository.findByTitle(title.toLowerCase());
         //get the first recipe with that title
-        Recipe recipe = recipes.get(0);
-        return recipe.getCookTime();
+        return recipes.size() > 0 ? recipes.get(0).getCookTime() : "No recipe was found with that name";
     }
 
     /*
@@ -64,8 +62,7 @@ public class AlexaController {
     public @ResponseBody String getAlexaRecipePrepTimeByTitle(@PathVariable String title) {
         List<Recipe> recipes = recipeRepository.findByTitle(title.toLowerCase());
         //get the first recipe with that title
-        Recipe recipe = recipes.get(0);
-        return recipe.getPrepTime();
+        return recipes.size() > 0 ? recipes.get(0).getPrepTime() : "No recipe was found with that name";
     }
 
     /*
@@ -73,8 +70,10 @@ public class AlexaController {
      */
     @RequestMapping(value = "/alexa/recipes/{title}/ingredients", produces = "application/json", method = RequestMethod.GET)
     public @ResponseBody ResponseEntity<List<Ingredient>> getAlexaRecipeIngredients(@PathVariable String title) {
+        List<Recipe> recipes = recipeRepository.findByTitle(title.toLowerCase());
+
         //get the first recipe with that title
-        List<Ingredient> ingredients = recipeRepository.findByTitle(title.toLowerCase()).get(0).getIngredients();
+        List<Ingredient> ingredients = recipes.size() > 0 ? recipes.get(0).getIngredients() : Collections.emptyList();
         return new ResponseEntity<List<Ingredient>>(ingredients, HttpStatus.OK);
     }
 
@@ -83,8 +82,13 @@ public class AlexaController {
      */
     @RequestMapping(value = "/alexa/recipes/{title}/steps", produces = "application/json", method = RequestMethod.GET)
     public @ResponseBody ResponseEntity<List<Step>> getAlexaRecipeSteps(@PathVariable String title) {
+        List<Recipe> recipes = recipeRepository.findByTitle(title.toLowerCase());
+
         //get the first recipe with that title
-        List<Step> steps = recipeRepository.findByTitle(title.toLowerCase()).get(0).getSteps().stream().sorted(Comparator.comparing(Step::getStepNumber)).collect(Collectors.toList());;
+        List<Step> steps = recipes.size() > 0 ?
+                recipes.get(0).getSteps().stream().sorted(Comparator.comparing(Step::getStepNumber)).collect(Collectors.toList()) :
+                Collections.emptyList();
+
         return new ResponseEntity<List<Step>>(steps, HttpStatus.OK);
     }
 }
