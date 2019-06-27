@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
 
                 .antMatchers(HttpMethod.GET,  "/", "/alexa/**").permitAll()
-                .antMatchers("/login", "/signup", "/*.css", "/logo.png", "/logoutSuccess").permitAll()
+                .antMatchers("/login", "/signup", "/*.css", "/images/chef-mate.png", "/logoutSuccess").permitAll()
 
                 .anyRequest().authenticated()
 
