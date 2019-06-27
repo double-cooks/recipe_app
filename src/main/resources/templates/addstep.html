@@ -9,9 +9,8 @@
 </head>
 <body>
     <nav th:replace="fragments/navbar :: nav(user=${user})"></nav>
-    <h1 class="page-title">Add Step</h1>
-
-    <form th:action="@{/recipes/{id}/steps/new/{isInitialCreation}(id=${id},isInitialCreation=${isInitialCreation})}" method="POST" id="postform">
+    <h1 class="page-title" id="new-step">Add Step</h1>
+    <form th:action="@{/recipes/{id}/steps/new/{isInitialCreation}(id=${id},isInitialCreation=${isInitialCreation})}" method="POST" id="postform" class="add-recipe-form">
         <fieldset>
             <table>
                 <thead>
@@ -31,14 +30,18 @@
         </fieldset>
 
     </form>
-    <h2>Steps</h2>
-    <ul th:each="step : ${steps}">
-        <li><span th:text="${step.stepNumber}"></span> <span th:text="${step.description}"></span>
-            <button>
-                <a th:href="@{/recipes/{id}/steps/{id2}/update/true(id=${id},id2=${step.getId()})}">Edit</a>
-            </button>
-        </li>
-    </ul>
-    <button><a th:href="@{/recipes/{id}(id=${recipe.getId()})}">Save & Review</a></button>
+    <div class="center-align">
+        <h2>Steps</h2>
+        <ul th:each="step : ${steps}">
+            <li><span th:text="${step.stepNumber}"></span> <span th:text="${step.description}"></span>
+                <button>
+                    <a th:href="@{/recipes/{id}/steps/{id2}/update/true(id=${id},id2=${step.getId()})}">Edit</a>
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="center-align">
+        <button><a th:href="@{/recipes/{id}(id=${recipe.getId()})}">Save & Review</a></button>
+    </div>
 </body>
 </html>
