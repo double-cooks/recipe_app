@@ -1,5 +1,7 @@
 package tgreenidge.com.recipe_app.recipes.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,6 +11,7 @@ public class Step {
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
 
+    @JsonBackReference
     @ManyToOne
     Recipe recipe;
 

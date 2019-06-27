@@ -271,7 +271,7 @@ public class RecipeController {
         Recipe newRecipe = new Recipe(title, prepTime, cookTime, user);
         recipeRepository.save(newRecipe);
 
-        Recipe recipe = recipeRepository.findById(newRecipe.getId()).get();
+        Recipe recipe = recipeRepository.findById(newRecipe.getId());
         Ingredient newIngredient = new Ingredient(name, quantity, recipe);
         ingredientRepository.save(newIngredient);
 

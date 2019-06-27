@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -20,19 +22,22 @@ public class Recipe {
     String prepTime;
     String cookTime;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Ingredient> ingredients;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "recipe", cascade = {CascadeType.ALL})
     List<Step> steps;
 
+    @JsonBackReference
     @ManyToOne
     AppUser appUser;
 
     public Recipe(){}
 
     public Recipe(String title, String prepTime, String cookTime, AppUser appUser){
-        this.title = title;
+        this.title = title.toLowerCase();
         this.appUser = appUser;
         this.prepTime = prepTime;
         this.cookTime = cookTime;
@@ -71,7 +76,7 @@ public class Recipe {
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = title.toLowerCase();
     }
 
     public void setIngredients(List<Ingredient> ingredients) {
@@ -86,17 +91,4 @@ public class Recipe {
         this.appUser = appUser;
     }
 
-    public String toString(){
-//        String ingredients = getIngredients().stream()
-//                .collect(Collectors.joining(","));
-//        String steps = String.join("," , getSteps());
-        Gson gson = new Gson();
-
-        String recipeJsonString = gson.toJson(getSteps());
-        System.out.println(recipeJsonString);
-//        return "{\"title\":\"" + getTitle() + "\",\"prepTime\":\"" + getPrepTime() + "\",\"cookTime\":\"" + getCookTime() +
-//                "\",\"ingredients\":\"[" + ingredients + "]\"" + "\"}";
-        return recipeJsonString;
-
-    }
 }
