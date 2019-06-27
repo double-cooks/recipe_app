@@ -1,6 +1,5 @@
 package tgreenidge.com.recipe_app.recipes;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,15 +8,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.RequestPostProcessor;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import tgreenidge.com.recipe_app.recipes.controllers.AppUserController;
+import tgreenidge.com.recipe_app.recipes.controllers.RecipeController;
 import tgreenidge.com.recipe_app.recipes.models.AppUser;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertNotNull;
-import static org.springframework.security.test.web.reactive.server.SecurityMockServerConfigurers.springSecurity;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -31,10 +28,11 @@ public class RecipesApplicationTests {
 
 	@Autowired
 	AppUserController appUserControllerTest;
+	@Autowired
+	RecipeController recipeControllerTest;
 
 	@Autowired
 	private MockMvc mockMvc;
-
 
 
 	// Helper Methods
@@ -43,11 +41,23 @@ public class RecipesApplicationTests {
 		return testUser;
 	}
 
-
 	// Unit/Integration Testing
 	@Test
 	public void testControllerIsAutowired() {
 		assertNotNull(appUserControllerTest);
+	}
+
+	@Test
+	@WithMockUser(username = "greg", password = "password", roles = "USER")
+	public void testIntegrationProfile() throws Exception {
+		mockMvc.perform(get("/profile"))
+				.andExpect(content().string(containsString("My Profile")));
+	}
+
+	@Test
+	public void testIntegrationLogin() throws Exception{
+		mockMvc.perform(formLogin("/profile").user("user").password("password"));
+
 	}
 
 	@Test
@@ -69,7 +79,7 @@ public class RecipesApplicationTests {
 	public void testRequestToSignUpGivesUsername() throws Exception {
 		mockMvc.perform(get("/login")).andExpect(content().string(containsString("Username")));
 	}
-	
+
 
 	@Test
 	public void testSlashNotSignedInRoutePass() throws Exception {
@@ -113,5 +123,25 @@ public class RecipesApplicationTests {
 	public void testCreateRecipeNotSignedInRoutePass() throws Exception {
 		mockMvc.perform(get("/recipes/create")).andExpect(status().is3xxRedirection());
 	}
+
+
+
+
+	// Recipe Controller
+	@Test
+	public void testRecipeControllerIsAutowired() {
+		assertNotNull(recipeControllerTest);
+	}
+
+	@Test
+	public void givenGreetURIWithPostAndFormData_whenMockMVC_thenResponseOK() {
+		this.mockMvc.perform(post("/greetWithPostAndFormData").param("id", "1")
+				.param("name", "John Doe")).andDo(print()).andExpect(status().isOk())
+
+				.andExpect(content().contentType("application/json;charset=UTF-8"))
+				.andExpect(jsonPath("$.message").value("Hello World John Doe!!!"))
+				.andExpect(jsonPath("$.id").value(1));
+	}
+
 
 }
