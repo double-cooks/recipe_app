@@ -23,9 +23,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td><input  type="text" name="name"/></td>
-                <td><input  type="text" name="quantity"/></td>
+            <tr th:each="ingredient : ${ingredient}">
+                <td><input th:value="${ingredient.name}"  type="text" name="name"/></td>
+                <td><input th:value="${ingredient.quantity}" type="text" name="quantity"/></td>
             </tr>
             </tbody>
         </table>
