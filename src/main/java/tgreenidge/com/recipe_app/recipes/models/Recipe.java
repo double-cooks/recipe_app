@@ -2,14 +2,11 @@ package tgreenidge.com.recipe_app.recipes.models;
 
 
 import javax.persistence.*;
-import java.util.Arrays;
+
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 @Entity
 public class Recipe {
