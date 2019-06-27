@@ -1,5 +1,6 @@
 package tgreenidge.com.recipe_app.recipes.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,6 +21,7 @@ public class AppUser implements UserDetails {
     String firstname;
     String lastname;
 
+    @JsonManagedReference // necessary for JSON response for RestController for Alexa
     @OneToMany(mappedBy = "appUser")
     public List<Recipe> recipes;
 

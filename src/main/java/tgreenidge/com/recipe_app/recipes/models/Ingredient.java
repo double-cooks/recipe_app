@@ -1,5 +1,7 @@
 package tgreenidge.com.recipe_app.recipes.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,6 +13,7 @@ public class Ingredient {
     String name;
     String quantity;
 
+    @JsonBackReference // necessary for JSON response for RestController for Alexa
     @ManyToOne
     Recipe recipe;
 
