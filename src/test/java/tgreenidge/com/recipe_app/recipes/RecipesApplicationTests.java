@@ -307,7 +307,7 @@ public class RecipesApplicationTests {
     @Test
     public void alexaRecipesViewJsonTest() throws Exception {
         this.mockMvc.perform(get("/alexa/recipes"))
-                .andDo(print()).andExpect(status().isOk())
+                .andExpect(status().isOk())
                 .andDo(print()).andExpect(content().contentType("application/json;charset=UTF-8"));
 
     }
@@ -316,22 +316,22 @@ public class RecipesApplicationTests {
     @Test
     public void alexaRouteTestRecipe() throws Exception {
         this.mockMvc.perform(get("/alexa/recipes/test"))
+				.andExpect(status().isOk())
                 .andDo(print()).andExpect(content().contentType("application/json;charset=UTF-8"));
-//                .andExpect(jsonPath("$.title", is("test")));
     }
 
     @Test
     public void alexaRouteTestStep() throws Exception {
-	    this.mockMvc.perform(get("/alexa/recipes/test/steps"))
-                .andDo(print()).andExpect(content().contentType("application/json;charset=UTF-8"));
-//                .andExpect(jsonPath("$.description", is("test")));
+	    this.mockMvc.perform(get("/alexa/recipes/test/ingredients"))
+				.andExpect(status().isOk())
+				.andDo(print()).andExpect(content().contentType("application/json;charset=UTF-8"));
     }
 
     @Test
     public void alexaRouteTestIngredient() throws Exception {
         this.mockMvc.perform(get("/alexa/recipes/test/steps"))
-                .andDo(print()).andExpect(content().contentType("application/json;charset=UTF-8"));
-//                .andExpect(jsonPath("$.name", is("ingredient1")));
-    }
+				.andExpect(status().isOk())
+				.andExpect(content().contentType("application/json;charset=UTF-8"))
+	}
 
 }
