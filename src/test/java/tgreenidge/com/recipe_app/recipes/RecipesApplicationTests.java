@@ -132,23 +132,173 @@ public class RecipesApplicationTests {
 
 
 
-	// Recipe Controller
+	// Recipe Controller tests
+	//tests with @WithMockUser annotation must be a user that exists on the server this test code
+	// runs against, and id's must correlate to what exists on the db the server connects to
+
+	//get routes
 	@Test
 	public void testRecipeControllerIsAutowired() {
 		assertNotNull(recipeControllerTest);
 	}
 
 	@Test
+	public void getRecipeCreateTest() throws Exception {
+		mockMvc.perform(get("/recipes/create"))
+				.andDo(print()).andExpect(status().is3xxRedirection());
+	}
+	@Test
 	@WithMockUser(username = "dd", password = "dd", roles = "USER")
-	public void recipesCreateTest() throws Exception {
-		mockMvc.perform(post("/recipes/create")
-				.param("title", "Cement")
-				.param("prepTime", "1 hour")
-				.param("cookTime", "2 hours")).andDo(print()).andExpect(status().is3xxRedirection());
+	public void getRecipeCreateTestAuth() throws Exception {
+		mockMvc.perform(get("/recipes/create"))
+				.andExpect(content().string(containsString("Create Recipe")));
+	}
+
+	@Test
+
+	public void getIngredientCreateTest() throws Exception {
+		mockMvc.perform(get("/recipes/{id}/ingredients/new/{isInitialCreation}","135", "true"))
+				.andDo(print()).andExpect(status().is3xxRedirection());
+	}
+	@Test
+	@WithMockUser(username = "dd", password = "dd", roles = "USER")
+	public void getIngredientCreateTest2() throws Exception {
+		mockMvc.perform(get("/recipes/{id}/ingredients/new/{isInitialCreation}","135", "true"))
+				.andExpect(content().string(containsString("Create Ingredient")));
+	}
+
+	@Test
+	public void getIngredientUpdate() throws Exception {
+		mockMvc.perform(get("/recipes/{id}/ingredients/{id2}/update/{isInitialCreation}","135", "136", "true"))
+				.andDo(print()).andExpect(status().is3xxRedirection());
+	}
+
+	@Test
+	@WithMockUser(username = "dd", password = "dd", roles = "USER")
+	public void getIngredientUpdate2() throws Exception {
+		mockMvc.perform(get("/recipes/{id}/ingredients/{id2}/update/{isInitialCreation}", "135", "136", "false"))
+				.andExpect(content().string(containsString("Update Ingredient")));
+	}
+
+	@Test
+	public void getStepCreateTest() throws Exception {
+		mockMvc.perform(get("/recipes/{id}/steps/new/{isInitialCreation}","135", "true"))
+				.andDo(print()).andExpect(status().is3xxRedirection());
 
 	}
 
-	// alexa controller
+	@Test
+	@WithMockUser(username = "dd", password = "dd", roles = "USER")
+	public void getStepCreateTest2() throws Exception {
+		mockMvc.perform(get("/recipes/{id}/steps/new/{isInitialCreation}","135", "false"))
+				.andExpect(content().string(containsString("Add Step")));
+	}
+
+	@Test
+	public void getStepUpdate() throws Exception {
+		mockMvc.perform(get("/recipes/{id}/steps/{id2}/update/{isInitialCreation}","135", "140", "true"))
+				.andDo(print()).andExpect(status().is3xxRedirection());
+	}
+
+	@Test
+	@WithMockUser(username = "dd", password = "dd", roles = "USER")
+	public void getStepUpdate2() throws Exception {
+		mockMvc.perform(get("/recipes/{id}/steps/{id2}/update/{isInitialCreation}","135", "140", "false"))
+				.andExpect(content().string(containsString("Update Step")));
+	}
+
+
+	//post routes
+	@Test
+	@WithMockUser(username = "dd", password = "dd", roles = "USER")
+	public void recipesCreateTest() throws Exception {
+		mockMvc.perform(post("/recipes/create")
+				.param("title", "IntegrationTestTitle")
+				.param("prepTime", "1 hour")
+				.param("cookTime", "2 hours"))
+				.andDo(print()).andExpect(status().is3xxRedirection());
+
+	}
+
+	@Test
+	@WithMockUser(username = "dd", password = "dd", roles = "USER")
+	public void ingredientCreateTest() throws Exception {
+		mockMvc.perform(post("/recipes/{id}/ingredients/new/{isInitialCreation}","135", "true")
+				.param("name", "IntegName")
+				.param("quantity", "IntegQuantity"))
+				.andDo(print()).andExpect(status().is3xxRedirection());
+
+	}
+
+	@Test
+	@WithMockUser(username = "dd", password = "dd", roles = "USER")
+	public void ingredientCreateTest2() throws Exception {
+		mockMvc.perform(post("/recipes/{id}/ingredients/new/{isInitialCreation}","135", "false")
+				.param("name", "IntegNameFRoute")
+				.param("quantity", "IntegQuantityFRoute"))
+				.andDo(print()).andExpect(status().is3xxRedirection());
+
+	}
+
+	@Test
+	@WithMockUser(username = "dd", password = "dd", roles = "USER")
+	public void ingredientUpdate() throws Exception {
+		mockMvc.perform(post("/recipes/{id}/ingredients/{id2}/update/{isInitialCreation}","135", "136", "true")
+				.param("name", "updateIntegName")
+				.param("quantity", "updateIntegQuantity"))
+				.andDo(print()).andExpect(status().is3xxRedirection());
+	}
+
+	@Test
+	@WithMockUser(username = "dd", password = "dd", roles = "USER")
+	public void ingredientUpdate2() throws Exception {
+		mockMvc.perform(post("/recipes/{id}/ingredients/{id2}/update/{isInitialCreation}","135", "136", "false")
+				.param("name", "updateIntegNameFRoute")
+				.param("quantity", "updateIntegQuantityFRoute"))
+				.andDo(print()).andExpect(status().is3xxRedirection());
+	}
+
+	@Test
+	@WithMockUser(username = "dd", password = "dd", roles = "USER")
+	public void stepCreateTest() throws Exception {
+		mockMvc.perform(post("/recipes/{id}/steps/new/{isInitialCreation}","135", "true")
+				.param("stepNumber", "1")
+				.param("description", "IntegDescription"))
+				.andDo(print()).andExpect(status().is3xxRedirection());
+
+	}
+
+	@Test
+	@WithMockUser(username = "dd", password = "dd", roles = "USER")
+	public void stepCreateTest2() throws Exception {
+		mockMvc.perform(post("/recipes/{id}/steps/new/{isInitialCreation}","135", "false")
+				.param("stepNumber", "1")
+				.param("description", "IntegDescriptionFRoute"))
+				.andDo(print()).andExpect(status().is3xxRedirection());
+
+	}
+
+	@Test
+	@WithMockUser(username = "dd", password = "dd", roles = "USER")
+	public void stepUpdate() throws Exception {
+		mockMvc.perform(post("/recipes/{id}/steps/{id2}/update/{isInitialCreation}","135", "140", "true")
+				.param("stepNumber", "2")
+				.param("description", "updateIntegDesc"))
+				.andDo(print()).andExpect(status().is3xxRedirection());
+	}
+
+	@Test
+	@WithMockUser(username = "dd", password = "dd", roles = "USER")
+	public void stepUpdate2() throws Exception {
+		mockMvc.perform(post("/recipes/{id}/steps/{id2}/update/{isInitialCreation}","135", "140", "false")
+				.param("stepNumber", "2")
+				.param("description", "updateIntegDescFRoute"))
+				.andDo(print()).andExpect(status().is3xxRedirection());
+	}
+	///recipes/{id}/steps/{id2}/delete
+	///recipes/{id}/ingredients/{id2}/delete
+
+	// alexa controller tests
     @Test
     public void testAlexaControllerIsAutowired() {
 	    assertNotNull(alexaController);
