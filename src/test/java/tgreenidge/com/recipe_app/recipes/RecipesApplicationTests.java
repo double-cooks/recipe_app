@@ -52,6 +52,10 @@ public class RecipesApplicationTests {
 		assertNotNull(appUserControllerTest);
 	}
 
+	//CHANGE: Devs who pull down this code will have failing tests because they may
+	// not have this particular user (user: dd, password: dd) saved in their database initially
+	//either note that in the readme or set up a more streamlined way for
+	// these tests to work for whoever pulls the repo down
 	@Test
 	@WithMockUser(username = "dd", password = "dd", roles = "USER")
 	public void testIntegrationProfile() throws Exception {
