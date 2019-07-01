@@ -49,21 +49,9 @@ public class RecipesApplicationTests {
 	}
 
 	@Test
-	@WithMockUser(username = "greg", password = "password", roles = "USER")
-	public void testIntegrationProfile() throws Exception {
-		mockMvc.perform(get("/profile"))
-				.andExpect(content().string(containsString("My Profile")));
-	}
-
-	@Test
 	public void testIntegrationLogin() throws Exception{
 		mockMvc.perform(formLogin("/profile").user("user").password("password"));
 
-	}
-
-	@Test
-	public void testRequestToRootGivesWelcome() throws Exception {
-		mockMvc.perform(get("/")).andExpect(content().string(containsString("Welcome to Doubly")));
 	}
 
 	@Test

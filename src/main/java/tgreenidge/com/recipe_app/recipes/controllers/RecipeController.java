@@ -155,6 +155,7 @@ public class RecipeController {
     public String getEditIngredientForm(@PathVariable Long id, @PathVariable Long id2, @PathVariable boolean isInitialCreation, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();
         Ingredient ingredientToUpdate = ingredientRepository.findById(id2).get();
+        // why an if here, user must be logged in to use this route
         if (p != null) {
             m.addAttribute("user", appUserRepository.findByUsername(p.getName()));
         }
@@ -250,6 +251,7 @@ public class RecipeController {
         return new RedirectView("/recipes/edit2/" + id);
     }
 
+    // routes don't seem very restful
     @GetMapping("/recipe/edit/{id}")
     public String getRecipeEdit(@PathVariable Long id, Model m, Principal p) {
         Recipe recipe = recipeRepository.findById(id).get();

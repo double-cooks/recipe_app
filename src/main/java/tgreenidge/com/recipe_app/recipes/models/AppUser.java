@@ -1,7 +1,6 @@
 package tgreenidge.com.recipe_app.recipes.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -15,6 +14,7 @@ public class AppUser implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
 
+    // Should make username etc private
     @Column(unique = true)
     String username;
     String password;

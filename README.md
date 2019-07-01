@@ -1,4 +1,8 @@
-# Doubly Cooked
+# Chef-mate
+
+Created by team Double
+
+![alt-text-1](src/main/resources/static/images/chef-mate.png)
 
 ## table of contents
 * [Documents](./documents)
@@ -12,7 +16,7 @@
 
 ## Summary
 
-Doubly Cooked is a recipe app developed for the casual home cook. It stores recipes in the cloud that can be accessed from the profile page after logging in. Recipes can be added, edited and deleted. User names must be unique and passwords are hashed.
+Chef-mate is a recipe app developed for the casual home cook. It stores recipes in the cloud that can be accessed from the profile page after logging in. Recipes can be added, edited and deleted. User names must be unique and passwords are hashed.
 ***
 
 ## Installation

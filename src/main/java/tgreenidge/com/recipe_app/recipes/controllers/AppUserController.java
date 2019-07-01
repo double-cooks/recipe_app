@@ -48,6 +48,9 @@ public class AppUserController {
     }
 
     @PostMapping("/signup")
+    // more error checking, throw exceptions for null
+    // also ad password length check at a minimum
+    // could also enforce use of special symbols in password
     public RedirectView createUser(String username, String password, String firstName, String lastName) {
         AppUser newUser = new AppUser(username, encoder.encode(password), firstName, lastName);
         appUserRepository.save(newUser);
