@@ -16,6 +16,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+//add documentation in readme for developing with Alexa on this app
+
 /*
     RestController for Alexa routes
  */
