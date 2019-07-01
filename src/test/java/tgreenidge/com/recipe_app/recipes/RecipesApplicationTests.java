@@ -331,7 +331,7 @@ public class RecipesApplicationTests {
     public void alexaRouteTestIngredient() throws Exception {
         this.mockMvc.perform(get("/alexa/recipes/test/steps"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType("application/json;charset=UTF-8"))
+				.andExpect(content().contentType("application/json;charset=UTF-8"));
 	}
 
 }
